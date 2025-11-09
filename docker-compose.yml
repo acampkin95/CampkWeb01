@@ -1,0 +1,13 @@
+version: "3.9"
+services:
+  campkin-web:
+    build: .
+    container_name: campkin-web
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - ADMIN_PASSCODE=${ADMIN_PASSCODE:-campkin}
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped

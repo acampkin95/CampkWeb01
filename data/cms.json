@@ -1,0 +1,519 @@
+{
+  "siteInfo": {
+    "heroTitle": "Single-owner warehouse & workshop",
+    "heroSubtitle": "Six bays, six storage rooms, and Phil on the tools every day.",
+    "ctaPrimary": "See sublets",
+    "ctaSecondary": "Available cars",
+    "address": "Campkin Cottage Unit, Bessemer Rd, Welwyn Garden City, Hertfordshire, AL7 1HF",
+    "phone": "+44 (0)1223 555 880",
+    "email": "phil@campkintrading.co.uk",
+    "hours": "Mon-Fri 08:00-18:00",
+    "heroBadge": "Independent since 1998",
+    "tagline": "Phil Campkin \u00b7 single warehouse unit",
+    "mapUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9941.01940204334!2d-0.2109329!3d51.8029134!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48763f2bc48c24d5%3A0x97c0a10628d0b923!2sBessemer%20Rd%2C%20Welwyn%20Garden%20City%20AL7%201HF%2C%20UK!5e0!3m2!1sen!2suk!4v1731200000000",
+    "heroStats": [
+      {
+        "label": "Workspace",
+        "value": "6 bays",
+        "detail": "2 medium \u00b7 2 large \u00b7 6 storage rooms"
+      },
+      {
+        "label": "Parking",
+        "value": "2 bays ea.",
+        "detail": "Dedicated spaces per licence"
+      },
+      {
+        "label": "Support",
+        "value": "24/7",
+        "detail": "CCTV, forklift + fibre internet"
+      }
+    ]
+  },
+  "warehouse": {
+    "headline": "Sub-let up to eight modular bays",
+    "subheading": "Each bay includes 63A power, CCTV, remote roller shutters, and shared amenities.",
+    "sections": [
+      {
+        "id": "A1",
+        "name": "Bay A1",
+        "sizeSqFt": 1100,
+        "availability": "Available",
+        "pricePerMonth": 1450,
+        "features": [
+          "Three-phase power",
+          "LED lighting",
+          "Mezzanine office"
+        ]
+      },
+      {
+        "id": "A2",
+        "name": "Bay A2",
+        "sizeSqFt": 1100,
+        "availability": "Reserved",
+        "pricePerMonth": 1400,
+        "features": [
+          "Vehicle lift ready",
+          "Roller shutter",
+          "Shared kitchenette"
+        ]
+      },
+      {
+        "id": "B1",
+        "name": "Bay B1",
+        "sizeSqFt": 1250,
+        "availability": "Available",
+        "pricePerMonth": 1650,
+        "features": [
+          "5m eaves height",
+          "Separate personnel door",
+          "High-speed data"
+        ]
+      },
+      {
+        "id": "B2",
+        "name": "Bay B2",
+        "sizeSqFt": 1250,
+        "availability": "Available",
+        "pricePerMonth": 1650,
+        "features": [
+          "Drive-through",
+          "LED flood lighting",
+          "Fire and intruder alarm"
+        ]
+      },
+      {
+        "id": "C1",
+        "name": "Bay C1",
+        "sizeSqFt": 900,
+        "availability": "Let",
+        "pricePerMonth": 1195,
+        "features": [
+          "Ideal for e-commerce",
+          "24/7 access",
+          "Dedicated parking"
+        ]
+      },
+      {
+        "id": "C2",
+        "name": "Bay C2",
+        "sizeSqFt": 900,
+        "availability": "Available",
+        "pricePerMonth": 1250,
+        "features": [
+          "Heating included",
+          "Stock racking",
+          "Shared wash bay"
+        ]
+      },
+      {
+        "id": "D1",
+        "name": "Bay D1",
+        "sizeSqFt": 1500,
+        "availability": "Available",
+        "pricePerMonth": 1895,
+        "features": [
+          "HGV turning circle",
+          "Dual shutters",
+          "Private office"
+        ]
+      },
+      {
+        "id": "D2",
+        "name": "Bay D2",
+        "sizeSqFt": 1500,
+        "availability": "Coming Soon",
+        "pricePerMonth": 1895,
+        "features": [
+          "Acoustic insulation",
+          "Solar-ready roof",
+          "EV chargers"
+        ]
+      }
+    ]
+  },
+  "services": [
+    {
+      "id": "servicing",
+      "name": "Servicing & Repairs",
+      "description": "Menu-priced interim, full, and major servicing for all marques using OEM spec oils.",
+      "priceFrom": 149
+    },
+    {
+      "id": "diagnostics",
+      "name": "Dealer-Level Diagnostics",
+      "description": "Bosch and Autologic tooling for ADAS, key coding, and module programming.",
+      "priceFrom": 75
+    },
+    {
+      "id": "mot",
+      "name": "MOT Management",
+      "description": "Class 4 & 7 MOTs with same-day rectification and courtesy cars.",
+      "priceFrom": 54
+    },
+    {
+      "id": "tyres",
+      "name": "Tyres & Alignment",
+      "description": "Hunter 4-wheel alignment, TPMS rebuilds, run-flat and EV tyre stock.",
+      "priceFrom": 49
+    },
+    {
+      "id": "performance",
+      "name": "Performance Upgrades",
+      "description": "ECU remaps, exhausts, suspension, and brake packages with warranty.",
+      "priceFrom": 299
+    }
+  ],
+  "vehicles": [
+    {
+      "id": "stk2401",
+      "title": "2021 BMW 330e M Sport Pro",
+      "price": 28995,
+      "mileage": 21450,
+      "fuel": "Hybrid Petrol",
+      "transmission": "Automatic",
+      "year": 2021,
+      "images": [
+        "https://images.unsplash.com/photo-1503736334956-4c8f8e92946d",
+        "https://images.unsplash.com/photo-1503376780353-7e6692767b70",
+        "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7"
+      ],
+      "description": "1 owner, Pro Pack, Tech Plus, 12m warranty.",
+      "status": "In Stock",
+      "body": "Saloon",
+      "colour": "Portimao Blue",
+      "features": [
+        "Heated seats",
+        "HUD",
+        "Adaptive LED"
+      ],
+      "vrm": "LC21CMP",
+      "listPrice": 42995,
+      "complianceNotes": "ULEZ & CAZ clear 08 Nov 2025; BMW battery warranty to 2029.",
+      "complianceProofs": [
+        {
+          "id": "proof-stk2401-1",
+          "type": "DVSA MOT Cert",
+          "reference": "DVSA/112233",
+          "addedAt": "2025-09-12T10:00:00Z"
+        },
+        {
+          "id": "proof-stk2401-2",
+          "type": "BMW Battery Health",
+          "reference": "BMW-iPerformance/5566",
+          "url": "https://example.com/reports/bmw330e-battery.pdf",
+          "addedAt": "2025-10-05T11:30:00Z"
+        }
+      ],
+      "complianceHistory": [
+        {
+          "id": "snapshot-stk2401-20251005",
+          "vrm": "LC21CMP",
+          "recordedAt": "2025-10-05T11:30:00Z",
+          "summary": "ULEZ/CAZ clear confirmed",
+          "tax": {
+            "regime": "modern",
+            "firstYearRate": 130,
+            "totalAnnual": 605,
+            "expensiveCarSupplement": 410
+          },
+          "ulez": "Compliant",
+          "caz": "Compliant",
+          "notes": "Battery certificate on file"
+        }
+      ]
+    },
+    {
+      "id": "stk2402",
+      "title": "2019 Ford Transit Custom Limited L2",
+      "price": 17950,
+      "mileage": 48210,
+      "fuel": "Diesel",
+      "transmission": "Manual",
+      "year": 2019,
+      "images": [
+        "https://images.unsplash.com/photo-1489515217757-5fd1be406fef",
+        "https://images.unsplash.com/photo-1511919884226-fd3cad34687c",
+        "https://images.unsplash.com/photo-1469474968028-56623f02e42e"
+      ],
+      "description": "Twin side doors, racking, Euro 6.",
+      "status": "Reserved",
+      "body": "Panel Van",
+      "colour": "Frozen White",
+      "features": [
+        "Heated windscreen",
+        "Apple CarPlay"
+      ],
+      "vrm": "WF69CAMP",
+      "listPrice": 35695,
+      "complianceNotes": "Euro 6.2 diesel. Birmingham & Portsmouth CAZ ready.",
+      "complianceProofs": [
+        {
+          "id": "proof-stk2402-1",
+          "type": "HPI Finance Clearance",
+          "reference": "HPI/TRANSIT-2209",
+          "addedAt": "2025-09-18T12:15:00Z"
+        }
+      ],
+      "complianceHistory": [
+        {
+          "id": "snapshot-stk2402-20250918",
+          "vrm": "WF69CAMP",
+          "recordedAt": "2025-09-18T12:15:00Z",
+          "summary": "Euro 6.2 diesel \u2013 CAZ pass",
+          "tax": {
+            "regime": "modern",
+            "firstYearRate": 1360,
+            "totalAnnual": 605,
+            "expensiveCarSupplement": null
+          },
+          "ulez": "Compliant",
+          "caz": "Compliant",
+          "notes": "Euro 6.2 certificate attached"
+        }
+      ]
+    },
+    {
+      "id": "stk2403",
+      "title": "2022 Kia EV6 GT-Line",
+      "price": 38995,
+      "mileage": 11200,
+      "fuel": "Electric",
+      "transmission": "Automatic",
+      "year": 2022,
+      "images": [
+        "https://images.unsplash.com/photo-1619681740098-9b38d50b021b",
+        "https://images.unsplash.com/photo-1502877338535-766e1452684a",
+        "https://images.unsplash.com/photo-1542291026-7eec264c27ff"
+      ],
+      "description": "Ultra-fast charging, heat pump, warranty to 2029.",
+      "status": "In Stock",
+      "body": "Crossover",
+      "colour": "Interstellar Grey",
+      "features": [
+        "Meridian audio",
+        "ADAS pack"
+      ],
+      "vrm": "EV22CAMP",
+      "listPrice": 57500,
+      "complianceNotes": "Zero-emission GT-Line. Exempt from ULEZ / CAZ charges.",
+      "complianceProofs": [
+        {
+          "id": "proof-stk2403-1",
+          "type": "ZEV Certificate",
+          "reference": "KIA/EV6/ZEV-2025",
+          "addedAt": "2025-10-22T09:45:00Z"
+        }
+      ],
+      "complianceHistory": [
+        {
+          "id": "snapshot-stk2403-20251022",
+          "vrm": "EV22CAMP",
+          "recordedAt": "2025-10-22T09:45:00Z",
+          "summary": "Zero emissions \u2013 exempt",
+          "tax": {
+            "regime": "modern",
+            "firstYearRate": 0,
+            "totalAnnual": 0,
+            "expensiveCarSupplement": null
+          },
+          "ulez": "Compliant",
+          "caz": "Compliant",
+          "notes": "Heat pump battery report uploaded"
+        }
+      ]
+    },
+    {
+      "id": "stk2404",
+      "title": "2018 Land Rover Discovery Commercial",
+      "price": 27995,
+      "mileage": 71500,
+      "fuel": "Diesel",
+      "transmission": "Automatic",
+      "year": 2018,
+      "images": [
+        "https://images.unsplash.com/photo-1502877338535-766e1452684a",
+        "https://images.unsplash.com/photo-1503376780353-7e6692767b70",
+        "https://images.unsplash.com/photo-1503736334956-4c8f8e92946d"
+      ],
+      "description": "VAT qualifying, 7-seat conversion possible.",
+      "status": "In Prep",
+      "body": "SUV",
+      "colour": "Indus Silver",
+      "features": [
+        "Air suspension",
+        "360 camera"
+      ],
+      "vrm": "OV18CAMP",
+      "listPrice": 49950,
+      "complianceNotes": "Check London ULEZ charge until SCR retrofit completed.",
+      "complianceProofs": [
+        {
+          "id": "proof-stk2404-1",
+          "type": "SCR Retrofit Booking",
+          "reference": "EMISSIONS/LRDISC/BOOK-44",
+          "addedAt": "2025-10-12T08:00:00Z"
+        }
+      ],
+      "complianceHistory": [
+        {
+          "id": "snapshot-stk2404-20251012",
+          "vrm": "OV18CAMP",
+          "recordedAt": "2025-10-12T08:00:00Z",
+          "summary": "CAZ chargeable until retrofit",
+          "tax": {
+            "regime": "modern",
+            "firstYearRate": 2190,
+            "totalAnnual": 605,
+            "expensiveCarSupplement": 410
+          },
+          "ulez": "Chargeable",
+          "caz": "Chargeable",
+          "notes": "Retrofit scheduled for December"
+        }
+      ]
+    }
+  ],
+  "testimonials": [
+    {
+      "id": "t1",
+      "name": "Fen Logistic",
+      "quote": "Campkin kept us trading during peak with flexible space and overnight access."
+    },
+    {
+      "id": "t2",
+      "name": "Sarah & Ian, retail customers",
+      "quote": "Straight-talking sales, no admin fees, and they delivered our XC60 the next day."
+    }
+  ],
+  "faqs": [
+    {
+      "id": "f1",
+      "question": "Do you arrange finance?",
+      "answer": "Yes, FCA regulated partners provide HP and PCP with same-day proposals."
+    },
+    {
+      "id": "f2",
+      "question": "Can I short-term license a bay?",
+      "answer": "Minimum term is 3 months with rolling monthly notice afterwards."
+    },
+    {
+      "id": "f3",
+      "question": "What documents do you supply with vehicle sales?",
+      "answer": "HPI certificate, full service history, and 12-month nationwide warranty as standard."
+    }
+  ],
+  "theme": {
+    "brandColor": "#0f172a",
+    "accentColor": "#f97316",
+    "mutedColor": "#94a3b8",
+    "backgroundColor": "#f8fafc",
+    "heroImage": "https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=1800&q=80",
+    "heroOverlay": "rgba(15,23,42,0.55)",
+    "logoText": "Campkin"
+  },
+  "performance": {
+    "stats": [
+      {
+        "label": "Bays occupied",
+        "value": "6/8",
+        "description": "Live occupancy"
+      },
+      {
+        "label": "Vehicles retailed",
+        "value": "312",
+        "description": "Rolling 12 months"
+      },
+      {
+        "label": "Fleet uptime",
+        "value": "98.4%",
+        "description": "Managed clients"
+      },
+      {
+        "label": "Avg. lead time",
+        "value": "48h",
+        "description": "From enquiry to handover"
+      }
+    ],
+    "badges": [
+      "FCA Regulated",
+      "IMI Master Techs",
+      "EV Qualified",
+      "Bosch Diagnostics"
+    ]
+  },
+  "storefront": {
+    "eyebrow": "Storefront",
+    "title": "Stock that's retail-ready",
+    "description": "Every vehicle goes through DVLA/DVSA compliance, buying sanity checks, and in-house prep before it hits the forecourt. Browse the live catalogue or request sourcing support.",
+    "highlights": [
+      {
+        "eyebrow": "Compliance-first",
+        "title": "Proof-ready listings",
+        "description": "DVLA tax, MOT, ULEZ/CAZ decisions & proof packs surfaced on every listing."
+      },
+      {
+        "eyebrow": "Buyer-ready PDFs",
+        "title": "Sales enablement",
+        "description": "Buying desk exports, damage scoring, and scripted talk tracks in seconds."
+      }
+    ],
+    "primaryCta": {
+      "label": "Browse stock",
+      "href": "/cars"
+    },
+    "secondaryCta": {
+      "label": "Run buying check",
+      "href": "/contact"
+    }
+  },
+  "valueProps": {
+    "eyebrow": "Why Campkin",
+    "title": "One campus, three revenue streams",
+    "description": "Phil Campkin's Hertfordshire site ties together warehousing, workshop, and car sales so subtenants and buyers tap into the same infrastructure.",
+    "items": [
+      {
+        "id": "warehouse",
+        "title": "Warehouse",
+        "description": "8 bays with CCTV, EV charging, roller shutters, and 24/7 ANPR access.",
+        "icon": "BuildingOffice2Icon"
+      },
+      {
+        "id": "workshop",
+        "title": "Workshop",
+        "description": "IMI master techs, dealer diagnostics, MOT management, and fleet uptime teams.",
+        "icon": "WrenchScrewdriverIcon"
+      },
+      {
+        "id": "retail",
+        "title": "Retail",
+        "description": "FCA regulated finance, nationwide delivery, and compliance-backed stock.",
+        "icon": "ShoppingBagIcon"
+      }
+    ]
+  },
+  "compliancePromo": {
+    "eyebrow": "New \u00b7 2025",
+    "title": "Real-time DVLA & MOT intelligence",
+    "description": "Plug into GOV.UK vehicle data before you bid, buy, or sub-let bays. Check tax, MOT history, and spec in one click.",
+    "bullets": [
+      "DVLA Vehicle Enquiry Service (tax & registration data)",
+      "DVSA MOT history feed (pass/fail, advisories)",
+      "Shareable spec sheet for internal approvals",
+      "Buying qualification with live comps + damage penalties"
+    ],
+    "primaryCta": {
+      "label": "Open compliance desk",
+      "href": "/contact"
+    },
+    "secondaryCta": {
+      "label": "Launch buying tool",
+      "href": "/cars"
+    }
+  },
+  "contactCta": {
+    "eyebrow": "Enquire",
+    "title": "Tell us what space you need",
+    "description": "Fill out the form and the lettings desk will confirm availability within one working day.",
+    "formCopy": "Warehouse lettings desk replies within one working day."
+  }
+}

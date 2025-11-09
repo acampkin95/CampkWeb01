@@ -6,21 +6,30 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "lint:strict": "eslint --max-warnings=0 .",
+    "audit": "npm audit --omit=dev"
   },
   "dependencies": {
+    "@heroicons/react": "^2.2.0",
+    "@types/pdfkit": "^0.17.3",
+    "next": "16.0.1",
+    "pdfkit": "^0.17.2",
     "react": "19.2.0",
     "react-dom": "19.2.0",
-    "next": "16.0.1"
+    "sharp": "^0.34.5",
+    "zod": "^4.1.12"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@tailwindcss/postcss": "^4",
-    "tailwindcss": "^4",
     "eslint": "^9",
-    "eslint-config-next": "16.0.1"
+    "eslint-config-next": "16.0.1",
+    "eslint-plugin-security": "^3.0.1",
+    "eslint-plugin-unicorn": "^62.0.0",
+    "tailwindcss": "^4",
+    "typescript": "^5"
   }
 }
