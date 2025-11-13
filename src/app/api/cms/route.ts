@@ -14,7 +14,7 @@ export async function GET() {
 export async function PUT(request: Request) {
   try {
     const cookieStore = await cookies();
-    const cookie = cookieStore.get("campkin_admin");
+    const cookie = cookieStore.get("campkin_session");
     if (!cookie) {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
@@ -29,6 +29,7 @@ export async function PUT(request: Request) {
     return NextResponse.json(parsed);
   } catch (error) {
     console.error("Admin save failed", error);
-    return NextResponse.json({ message: "Invalid payload", details: `${error}` }, { status: 400 });
+    const details = process.env.NODE_ENV === "production" ? undefined : `${error}`;
+    return NextResponse.json({ message: "Invalid payload", ...(details && { details }) }, { status: 400 });
   }
 }

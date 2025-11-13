@@ -1,9 +1,10 @@
 import { NextResponse } from "next/server";
 import { createSessionToken, sessionCookieName, sessionMaxAge, verifyPasscode } from "@/lib/auth";
 import { rateLimit } from "@/lib/rateLimit";
+import { ADMIN_RATE_LIMIT_WINDOW_MS } from "@/lib/constants";
 
 const RATE_LIMIT_MAX = Number(process.env.ADMIN_RATE_LIMIT ?? "10");
-const RATE_LIMIT_WINDOW_MS = Number(process.env.ADMIN_RATE_WINDOW_MS ?? `${10 * 60 * 1000}`); // 10 minutes
+const RATE_LIMIT_WINDOW_MS = Number(process.env.ADMIN_RATE_WINDOW_MS ?? ADMIN_RATE_LIMIT_WINDOW_MS);
 
 function getClientIdentifier(request: Request) {
   const forwarded = request.headers.get("x-forwarded-for") ?? "";

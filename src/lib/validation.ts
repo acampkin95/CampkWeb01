@@ -77,7 +77,7 @@ export const faqSchema = z.object({
 });
 
 export const leadSchema = z.object({
-  channel: z.enum(["warehouse", "vehicle"]),
+  channel: z.enum(["warehouse", "vehicle", "general"]),
   name: z.string().min(2),
   email: z.string().email(),
   phone: z.string().optional(),

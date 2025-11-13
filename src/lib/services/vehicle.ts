@@ -1,6 +1,7 @@
 import { cache } from "react";
 import { calculateVehicleTax } from "@/lib/calculators/ved";
 import { VehicleLookupResult, DvlaVehicle, MotTest, AirQualityResult } from "@/types/vehicle";
+import { COMPLIANCE_CACHE_TTL_MS } from "../constants";
 
 const DVLA_ENDPOINT = "https://driver-vehicle-licensing.api.gov.uk/vehicle-enquiry/v1/vehicles";
 const DVSA_ENDPOINT = "https://beta.check-mot.service.gov.uk/trade/vehicles/mot-tests";
@@ -8,7 +9,6 @@ const TFL_VEHICLE_ENDPOINT = "https://api.tfl.gov.uk/VehicleReg";
 const CAZ_API_BASE = process.env.CAZ_API_BASE ?? "https://api.drive-clean-air-zone.service.gov.uk/vehicles";
 const ULEZ_REFERENCE_URL = "https://tfl.gov.uk/modes/driving/ultra-low-emission-zone";
 const CAZ_REFERENCE_URL = "https://www.gov.uk/guidance/driving-in-a-clean-air-zone";
-const COMPLIANCE_TTL = 12 * 60 * 60 * 1000; // 12 hours
 
 type CachedCompliance = {
   expires: number;
@@ -92,7 +92,7 @@ async function fetchLiveCompliance(vrm: string) {
   const [ulez, caz] = await Promise.all([fetchTflUlez(vrm).catch(logComplianceError), fetchGovCaz(vrm).catch(logComplianceError)]);
 
   const payload: CachedCompliance = {
-    expires: Date.now() + COMPLIANCE_TTL,
+    expires: Date.now() + COMPLIANCE_CACHE_TTL_MS,
     ulez: ulez ?? undefined,
     caz: caz ?? undefined,
   };

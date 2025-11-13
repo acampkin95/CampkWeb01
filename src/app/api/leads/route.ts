@@ -2,10 +2,12 @@ import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import { addLead, listLeads } from "@/lib/leadStore";
 import { leadSchema } from "@/lib/validation";
+import { rateLimit } from "@/lib/rateLimit";
+import { LEAD_RATE_LIMIT_WINDOW_MS } from "@/lib/constants";
 
 async function requireAdmin() {
   const cookieStore = await cookies();
-  const token = cookieStore.get("campkin_admin");
+  const token = cookieStore.get("campkin_session");
   if (!token) {
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
   }
@@ -19,7 +21,25 @@ export async function GET() {
   return NextResponse.json({ leads });
 }
 
+function getClientIdentifier(request: Request) {
+  const forwarded = request.headers.get("x-forwarded-for") ?? "";
+  if (forwarded) {
+    return forwarded.split(",")[0]!.trim();
+  }
+  return request.headers.get("x-real-ip") ?? "local";
+}
+
 export async function POST(request: Request) {
+  // Rate limit: 5 submissions per 10 minutes per IP
+  const clientId = `lead:${getClientIdentifier(request)}`;
+  const { limited, retryAfter } = rateLimit(clientId, LEAD_RATE_LIMIT_WINDOW_MS, 5);
+  if (limited) {
+    return NextResponse.json(
+      { message: "Too many submissions. Please wait before trying again." },
+      { status: 429, headers: retryAfter ? { "Retry-After": `${Math.ceil(retryAfter / 1000)}` } : undefined },
+    );
+  }
+
   try {
     const payload = await request.json();
     const parsed = leadSchema.parse(payload);
@@ -27,6 +47,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ success: true, lead });
   } catch (error) {
     console.error("Lead submission failed", error);
-    return NextResponse.json({ message: "Invalid lead", details: `${error}` }, { status: 400 });
+    const details = process.env.NODE_ENV === "production" ? undefined : `${error}`;
+    return NextResponse.json({ message: "Invalid lead", ...(details && { details }) }, { status: 400 });
   }
 }
