@@ -67,6 +67,13 @@ export async function saveMedia(originalName: string, fileBuffer: Buffer): Promi
 export async function deleteMedia(filename: string) {
   await ensureDir();
   const filePath = path.join(uploadDir, path.basename(filename));
-  // eslint-disable-next-line security/detect-non-literal-fs-filename
-  await fs.unlink(filePath);
+  try {
+    // eslint-disable-next-line security/detect-non-literal-fs-filename
+    await fs.unlink(filePath);
+  } catch (error) {
+    // If file doesn't exist, that's fine - the goal is achieved
+    if ((error as NodeJS.ErrnoException).code !== "ENOENT") {
+      throw error;
+    }
+  }
 }

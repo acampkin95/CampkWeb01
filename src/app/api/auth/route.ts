@@ -24,24 +24,29 @@ export async function POST(request: Request) {
     );
   }
 
-  const { passcode } = await request.json();
+  try {
+    const { passcode } = await request.json();
 
-  if (!passcode || !verifyPasscode(passcode)) {
-    return NextResponse.json({ message: "Incorrect passcode" }, { status: 401 });
+    if (!passcode || !verifyPasscode(passcode)) {
+      return NextResponse.json({ message: "Incorrect passcode" }, { status: 401 });
+    }
+
+    const token = createSessionToken();
+    const response = NextResponse.json({ success: true });
+    response.cookies.set({
+      name: sessionCookieName,
+      value: token,
+      httpOnly: true,
+      sameSite: "strict",
+      secure: process.env.NODE_ENV === "production",
+      maxAge: sessionMaxAge,
+      path: "/",
+    });
+    return response;
+  } catch (error) {
+    console.error("Auth request failed", error);
+    return NextResponse.json({ message: "Invalid request" }, { status: 400 });
   }
-
-  const token = createSessionToken();
-  const response = NextResponse.json({ success: true });
-  response.cookies.set({
-    name: sessionCookieName,
-    value: token,
-    httpOnly: true,
-    sameSite: "strict",
-    secure: process.env.NODE_ENV === "production",
-    maxAge: sessionMaxAge,
-    path: "/",
-  });
-  return response;
 }
 
 export async function DELETE() {
