@@ -1,7 +1,12 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import dynamic from "next/dynamic";
 import { getCmsData } from "@/lib/dataStore";
-import { AdminDashboard } from "@/components/admin/admin-dashboard";
+
+// Code split admin dashboard for smaller initial bundle
+const AdminDashboard = dynamic(() => import("@/components/admin/admin-dashboard").then((mod) => ({ default: mod.AdminDashboard })), {
+  loading: () => <div className="flex items-center justify-center py-12"><div className="h-8 w-8 animate-spin rounded-full border-4 border-slate-200 border-t-slate-900" /></div>,
+});
 
 export const metadata = {
   title: "Admin | Campkin",
