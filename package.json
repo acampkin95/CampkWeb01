@@ -15,7 +15,9 @@
     "db:migrate:prod": "prisma migrate deploy",
     "db:studio": "prisma studio",
     "db:seed": "tsx scripts/migrate-json-to-db.ts",
-    "db:reset": "prisma migrate reset && npm run db:seed",
+    "db:seed:vehicles": "tsx scripts/seed-uk-vehicles.ts",
+    "db:seed:all": "npm run db:seed && npm run db:seed:vehicles",
+    "db:reset": "prisma migrate reset && npm run db:seed:all",
     "postinstall": "prisma generate"
   },
   "dependencies": {

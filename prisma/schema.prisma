@@ -29,39 +29,45 @@ model SiteConfig {
 // ============================================
 
 model Vehicle {
-  id                  String               @id @default(cuid())
-  title               String
-  price               Int
-  listPrice           Int?
-  mileage             Int
-  fuel                String
-  transmission        String
-  year                Int
-  vrm                 String?              @unique
-  body                String
-  colour              String
-  description         String               @db.Text
-  status              VehicleStatus        @default(IN_PREP)
-  features            String[]
-  images              String[]
-  complianceNotes     String?              @db.Text
-  complianceProofs    Json?
-  complianceHistory   Json?
-  views               Int                  @default(0)
-  savedCount          Int                  @default(0)
-  createdAt           DateTime             @default(now())
-  updatedAt           DateTime             @updatedAt
-  publishedAt         DateTime?
-  soldAt              DateTime?
+  id                String        @id @default(cuid())
+  title             String
+  price             Int
+  listPrice         Int?
+  mileage           Int
+  fuel              String
+  transmission      String
+  year              Int
+  makeId            String?
+  make              VehicleMake?  @relation(fields: [makeId], references: [id], onDelete: SetNull)
+  modelId           String?
+  model             VehicleModel? @relation(fields: [modelId], references: [id], onDelete: SetNull)
+  vrm               String?       @unique
+  body              String
+  colour            String
+  description       String        @db.Text
+  status            VehicleStatus @default(IN_PREP)
+  features          String[]
+  images            String[]
+  complianceNotes   String?       @db.Text
+  complianceProofs  Json?
+  complianceHistory Json?
+  views             Int           @default(0)
+  savedCount        Int           @default(0)
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+  publishedAt       DateTime?
+  soldAt            DateTime?
 
-  leads               Lead[]
-  priceHistory        VehiclePriceHistory[]
-  viewAnalytics       VehicleView[]
-  savedByUsers        SavedVehicle[]
+  leads         Lead[]
+  priceHistory  VehiclePriceHistory[]
+  viewAnalytics VehicleView[]
+  savedByUsers  SavedVehicle[]
 
   @@index([status, publishedAt])
   @@index([vrm])
   @@index([createdAt])
+  @@index([makeId])
+  @@index([modelId])
 }
 
 enum VehicleStatus {
@@ -72,62 +78,190 @@ enum VehicleStatus {
 }
 
 model VehiclePriceHistory {
-  id         String   @id @default(cuid())
-  vehicleId  String
-  vehicle    Vehicle  @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
-  price      Int
-  reason     String?
-  createdAt  DateTime @default(now())
-  createdBy  String?
+  id        String   @id @default(cuid())
+  vehicleId String
+  vehicle   Vehicle  @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  price     Int
+  reason    String?
+  createdAt DateTime @default(now())
+  createdBy String?
 
   @@index([vehicleId, createdAt])
 }
 
 model VehicleView {
-  id         String   @id @default(cuid())
-  vehicleId  String
-  vehicle    Vehicle  @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
-  referrer   String?
-  userAgent  String?
-  ipHash     String?
-  viewedAt   DateTime @default(now())
+  id        String   @id @default(cuid())
+  vehicleId String
+  vehicle   Vehicle  @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  referrer  String?
+  userAgent String?
+  ipHash    String?
+  viewedAt  DateTime @default(now())
 
   @@index([vehicleId, viewedAt])
   @@index([ipHash])
 }
 
 model SavedVehicle {
-  id         String   @id @default(cuid())
-  vehicleId  String
-  vehicle    Vehicle  @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
-  sessionId  String
-  createdAt  DateTime @default(now())
+  id        String   @id @default(cuid())
+  vehicleId String
+  vehicle   Vehicle  @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  sessionId String
+  createdAt DateTime @default(now())
 
   @@unique([vehicleId, sessionId])
   @@index([sessionId])
 }
 
 // ============================================
+
+// ============================================
+// VEHICLE CATALOG (UK MAKES & MODELS)
+// ============================================
+
+// VEHICLE CATALOG (UK MAKES & MODELS)
+model VehicleMake {
+  id           String         @id @default(cuid())
+  name         String         @unique
+  slug         String         @unique
+  country      String // UK, Germany, Japan, etc.
+  logoUrl      String?
+  description  String?        @db.Text
+  isActive     Boolean        @default(true)
+  displayOrder Int            @default(0)
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  models       VehicleModel[]
+  vehicles     Vehicle[]
+
+  @@index([slug])
+  @@index([isActive, displayOrder])
+}
+
+model VehicleModel {
+  id             String                 @id @default(cuid())
+  makeId         String
+  make           VehicleMake            @relation(fields: [makeId], references: [id], onDelete: Cascade)
+  name           String
+  slug           String
+  bodyType       String // Hatchback, Saloon, Estate, SUV, etc.
+  segment        String? // Supermini, Small Family, Executive, etc.
+  yearStart      Int
+  yearEnd        Int?
+  isActive       Boolean                @default(true)
+  imageUrl       String?
+  description    String?                @db.Text
+  createdAt      DateTime               @default(now())
+  updatedAt      DateTime               @updatedAt
+  configurations VehicleConfiguration[]
+  vehicles       Vehicle[]
+
+  @@unique([makeId, slug])
+  @@index([makeId, isActive])
+  @@index([bodyType])
+  @@index([yearStart, yearEnd])
+}
+
+model VehicleConfiguration {
+  id      String       @id @default(cuid())
+  modelId String
+  model   VehicleModel @relation(fields: [modelId], references: [id], onDelete: Cascade)
+
+  // Technical specs
+  trim         String // Base, SE, SEL, Sport, etc.
+  engineSize   Float? // in litres (1.0, 1.5, 2.0, etc.)
+  engineCode   String?
+  fuel         FuelType
+  transmission TransmissionType
+  drivetrain   DrivetrainType   @default(FWD)
+
+  // Performance
+  bhp          Int? // Brake horsepower
+  torque       Int? // Nm
+  acceleration Float? // 0-60 mph in seconds
+  topSpeed     Int? // mph
+
+  // Efficiency
+  mpgCombined  Float? // Miles per gallon
+  co2Emissions Int? // g/km
+  fuelTankSize Float? // litres
+
+  // Dimensions
+  length       Int? // mm
+  width        Int? // mm
+  height       Int? // mm
+  wheelbase    Int? // mm
+  bootCapacity Int? // litres
+
+  // Weight & capacity
+  kerbWeight     Int? // kg
+  maxWeight      Int? // kg
+  towingCapacity Int? // kg
+  seats          Int? // number of seats
+
+  // Tax & insurance
+  taxBand        String? // A, B, C, etc.
+  insuranceGroup String? // 1-50
+
+  // Availability
+  yearStart Int
+  yearEnd   Int?
+  isActive  Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([modelId, fuel])
+  @@index([fuel, transmission])
+  @@index([isActive])
+}
+
+enum FuelType {
+  PETROL
+  DIESEL
+  HYBRID
+  PLUG_IN_HYBRID
+  ELECTRIC
+  MILD_HYBRID
+  LPG
+  CNG
+}
+
+enum TransmissionType {
+  MANUAL
+  AUTOMATIC
+  SEMI_AUTOMATIC
+  CVT
+  DCT
+}
+
+enum DrivetrainType {
+  FWD
+  RWD
+  AWD
+  FOUR_WD
+}
+
 // WAREHOUSE & LETTING
 // ============================================
 
 model WarehouseUnit {
-  id              String              @id @default(cuid())
-  name            String              @unique
-  sizeSqFt        Int
-  availability    UnitAvailability    @default(AVAILABLE)
-  pricePerMonth   Int
-  features        String[]
-  description     String?             @db.Text
-  images          String[]
-  displayOrder    Int                 @default(0)
-  isActive        Boolean             @default(true)
-  createdAt       DateTime            @default(now())
-  updatedAt       DateTime            @updatedAt
+  id            String           @id @default(cuid())
+  name          String           @unique
+  sizeSqFt      Int
+  availability  UnitAvailability @default(AVAILABLE)
+  pricePerMonth Int
+  features      String[]
+  description   String?          @db.Text
+  images        String[]
+  displayOrder  Int              @default(0)
+  isActive      Boolean          @default(true)
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
 
-  bookings        WarehouseBooking[]
+  bookings           WarehouseBooking[]
   availabilityBlocks AvailabilityBlock[]
-  tenancies       Tenancy[]
+  tenancies          Tenancy[]
 
   @@index([availability, isActive])
 }
@@ -141,30 +275,30 @@ enum UnitAvailability {
 }
 
 model WarehouseBooking {
-  id           String        @id @default(cuid())
-  unitId       String
-  unit         WarehouseUnit @relation(fields: [unitId], references: [id], onDelete: Cascade)
-  leadId       String?       @unique
-  lead         Lead?         @relation(fields: [leadId], references: [id])
+  id     String        @id @default(cuid())
+  unitId String
+  unit   WarehouseUnit @relation(fields: [unitId], references: [id], onDelete: Cascade)
+  leadId String?       @unique
+  lead   Lead?         @relation(fields: [leadId], references: [id])
 
-  name         String
-  email        String
-  phone        String?
-  company      String?
+  name               String
+  email              String
+  phone              String?
+  company            String?
   requestedStartDate DateTime?
   requestedEndDate   DateTime?
-  message      String?       @db.Text
-  status       BookingStatus @default(PENDING)
+  message            String?       @db.Text
+  status             BookingStatus @default(PENDING)
 
-  adminNotes   String?       @db.Text
-  approvedBy   String?
-  approvedAt   DateTime?
+  adminNotes     String?   @db.Text
+  approvedBy     String?
+  approvedAt     DateTime?
   rejectedReason String?
 
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  tenancy      Tenancy?
+  tenancy Tenancy?
 
   @@index([unitId, status])
   @@index([email])
@@ -180,32 +314,32 @@ enum BookingStatus {
 }
 
 model Tenancy {
-  id              String            @id @default(cuid())
-  bookingId       String            @unique
-  booking         WarehouseBooking  @relation(fields: [bookingId], references: [id])
-  unitId          String
-  unit            WarehouseUnit     @relation(fields: [unitId], references: [id], onDelete: Restrict)
+  id        String           @id @default(cuid())
+  bookingId String           @unique
+  booking   WarehouseBooking @relation(fields: [bookingId], references: [id])
+  unitId    String
+  unit      WarehouseUnit    @relation(fields: [unitId], references: [id], onDelete: Restrict)
 
-  tenantName      String
-  tenantEmail     String
-  tenantPhone     String?
-  tenantCompany   String?
+  tenantName    String
+  tenantEmail   String
+  tenantPhone   String?
+  tenantCompany String?
 
-  startDate       DateTime
-  endDate         DateTime?
-  monthlyRate     Int
-  depositAmount   Int
-  depositPaid     Boolean           @default(false)
-  accessCode      String?
+  startDate     DateTime
+  endDate       DateTime?
+  monthlyRate   Int
+  depositAmount Int
+  depositPaid   Boolean   @default(false)
+  accessCode    String?
 
-  status          TenancyStatus     @default(ACTIVE)
+  status TenancyStatus @default(ACTIVE)
 
-  createdAt       DateTime          @default(now())
-  updatedAt       DateTime          @updatedAt
-  terminatedAt    DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  terminatedAt DateTime?
 
-  payments        Payment[]
-  accessLogs      AccessLog[]
+  payments   Payment[]
+  accessLogs AccessLog[]
 
   @@index([unitId, status])
   @@index([tenantEmail])
@@ -220,26 +354,26 @@ enum TenancyStatus {
 }
 
 model AvailabilityBlock {
-  id          String        @id @default(cuid())
-  unitId      String
-  unit        WarehouseUnit @relation(fields: [unitId], references: [id], onDelete: Cascade)
-  startDate   DateTime
-  endDate     DateTime
-  reason      String
-  notes       String?       @db.Text
-  createdAt   DateTime      @default(now())
-  createdBy   String?
+  id        String        @id @default(cuid())
+  unitId    String
+  unit      WarehouseUnit @relation(fields: [unitId], references: [id], onDelete: Cascade)
+  startDate DateTime
+  endDate   DateTime
+  reason    String
+  notes     String?       @db.Text
+  createdAt DateTime      @default(now())
+  createdBy String?
 
   @@index([unitId, startDate, endDate])
 }
 
 model AccessLog {
-  id          String    @id @default(cuid())
-  tenancyId   String
-  tenancy     Tenancy   @relation(fields: [tenancyId], references: [id], onDelete: Cascade)
-  accessType  String
-  accessedAt  DateTime  @default(now())
-  notes       String?
+  id         String   @id @default(cuid())
+  tenancyId  String
+  tenancy    Tenancy  @relation(fields: [tenancyId], references: [id], onDelete: Cascade)
+  accessType String
+  accessedAt DateTime @default(now())
+  notes      String?
 
   @@index([tenancyId, accessedAt])
 }
@@ -249,27 +383,27 @@ model AccessLog {
 // ============================================
 
 model Lead {
-  id          String      @id @default(cuid())
-  channel     LeadChannel
-  name        String
-  email       String
-  phone       String?
-  company     String?
-  message     String?     @db.Text
-  vehicleId   String?
-  status      LeadStatus  @default(NEW)
-  source      String?
-  assignedTo  String?
+  id         String      @id @default(cuid())
+  channel    LeadChannel
+  name       String
+  email      String
+  phone      String?
+  company    String?
+  message    String?     @db.Text
+  vehicleId  String?
+  status     LeadStatus  @default(NEW)
+  source     String?
+  assignedTo String?
 
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
   contactedAt DateTime?
   qualifiedAt DateTime?
   convertedAt DateTime?
 
-  vehicle     Vehicle?    @relation(fields: [vehicleId], references: [id], onDelete: SetNull)
-  booking     WarehouseBooking?
-  notes       LeadNote[]
+  vehicle Vehicle?          @relation(fields: [vehicleId], references: [id], onDelete: SetNull)
+  booking WarehouseBooking?
+  notes   LeadNote[]
 
   @@index([status, createdAt])
   @@index([channel, status])
@@ -307,24 +441,24 @@ model LeadNote {
 // ============================================
 
 model Payment {
-  id               String        @id @default(cuid())
-  tenancyId        String?
-  tenancy          Tenancy?      @relation(fields: [tenancyId], references: [id])
+  id        String   @id @default(cuid())
+  tenancyId String?
+  tenancy   Tenancy? @relation(fields: [tenancyId], references: [id])
 
-  amount           Int
-  currency         String        @default("GBP")
-  status           PaymentStatus @default(PENDING)
-  type             PaymentType
+  amount   Int
+  currency String        @default("GBP")
+  status   PaymentStatus @default(PENDING)
+  type     PaymentType
 
-  stripePaymentId  String?       @unique
-  stripeInvoiceId  String?
+  stripePaymentId String? @unique
+  stripeInvoiceId String?
 
-  dueDate          DateTime
-  paidAt           DateTime?
-  description      String?
+  dueDate     DateTime
+  paidAt      DateTime?
+  description String?
 
-  createdAt        DateTime      @default(now())
-  updatedAt        DateTime      @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@index([tenancyId, status])
   @@index([dueDate])
@@ -352,15 +486,15 @@ enum PaymentType {
 // ============================================
 
 model Service {
-  id          String   @id @default(cuid())
-  name        String   @unique
-  description String   @db.Text
-  priceFrom   Int
-  isActive    Boolean  @default(true)
-  displayOrder Int     @default(0)
-  category    String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id           String   @id @default(cuid())
+  name         String   @unique
+  description  String   @db.Text
+  priceFrom    Int
+  isActive     Boolean  @default(true)
+  displayOrder Int      @default(0)
+  category     String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 
   @@index([isActive, displayOrder])
 }
@@ -370,22 +504,22 @@ model Service {
 // ============================================
 
 model Media {
-  id            String      @id @default(cuid())
-  filename      String
-  originalName  String
-  mimeType      String
-  size          Int
-  url           String
-  cdnUrl        String?
-  cloudinaryId  String?     @unique
-  width         Int?
-  height        Int?
-  altText       String?
-  caption       String?
-  uploadedBy    String?
-  category      MediaCategory @default(OTHER)
+  id           String        @id @default(cuid())
+  filename     String
+  originalName String
+  mimeType     String
+  size         Int
+  url          String
+  cdnUrl       String?
+  cloudinaryId String?       @unique
+  width        Int?
+  height       Int?
+  altText      String?
+  caption      String?
+  uploadedBy   String?
+  category     MediaCategory @default(OTHER)
 
-  createdAt     DateTime    @default(now())
+  createdAt DateTime @default(now())
 
   @@index([category, createdAt])
   @@index([cloudinaryId])
@@ -400,29 +534,29 @@ enum MediaCategory {
 }
 
 model Testimonial {
-  id        String   @id @default(cuid())
-  name      String
-  quote     String   @db.Text
-  role      String?
-  company   String?
-  rating    Int?
-  isActive  Boolean  @default(true)
-  displayOrder Int   @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id           String   @id @default(cuid())
+  name         String
+  quote        String   @db.Text
+  role         String?
+  company      String?
+  rating       Int?
+  isActive     Boolean  @default(true)
+  displayOrder Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 
   @@index([isActive, displayOrder])
 }
 
 model Faq {
-  id        String   @id @default(cuid())
-  question  String
-  answer    String   @db.Text
-  category  String?
-  isActive  Boolean  @default(true)
-  displayOrder Int   @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id           String   @id @default(cuid())
+  question     String
+  answer       String   @db.Text
+  category     String?
+  isActive     Boolean  @default(true)
+  displayOrder Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 
   @@index([category, isActive, displayOrder])
 }
@@ -432,17 +566,17 @@ model Faq {
 // ============================================
 
 model AdminUser {
-  id            String   @id @default(cuid())
-  email         String   @unique
-  passwordHash  String
-  name          String
-  role          AdminRole @default(ADMIN)
-  isActive      Boolean  @default(true)
-  lastLoginAt   DateTime?
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  id           String    @id @default(cuid())
+  email        String    @unique
+  passwordHash String
+  name         String
+  role         AdminRole @default(ADMIN)
+  isActive     Boolean   @default(true)
+  lastLoginAt  DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
 
-  sessions      AdminSession[]
+  sessions AdminSession[]
 
   @@index([email])
 }
@@ -474,15 +608,15 @@ model AdminSession {
 // ============================================
 
 model AuditLog {
-  id         String   @id @default(cuid())
-  userId     String?
-  action     String
-  entity     String
-  entityId   String?
-  changes    Json?
-  ipAddress  String?
-  userAgent  String?
-  createdAt  DateTime @default(now())
+  id        String   @id @default(cuid())
+  userId    String?
+  action    String
+  entity    String
+  entityId  String?
+  changes   Json?
+  ipAddress String?
+  userAgent String?
+  createdAt DateTime @default(now())
 
   @@index([entity, entityId])
   @@index([userId, createdAt])
