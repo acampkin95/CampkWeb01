@@ -59,8 +59,6 @@ export async function POST(request: Request) {
         status: HTTP_STATUS.TOO_MANY_REQUESTS,
         headers: retryAfter ? { "Retry-After": `${Math.ceil(retryAfter / 1000)}` } : undefined
       }
-      { message: "Too many submissions. Please wait before trying again." },
-      { status: 429, headers: retryAfter ? { "Retry-After": `${Math.ceil(retryAfter / 1000)}` } : undefined },
     );
   }
 

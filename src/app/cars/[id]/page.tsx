@@ -48,18 +48,18 @@ export default async function CarDetailPage({ params }: Props) {
   const { siteInfo } = data;
 
   return (
-    <div className="mx-auto max-w-5xl space-y-8 pb-12">
+    <div className="mx-auto max-w-5xl space-y-4 pb-8 sm:space-y-8 sm:pb-12">
       {/* Breadcrumb Navigation */}
-      <nav className="flex items-center gap-2 text-sm text-slate-600">
-        <Link href="/" className="hover:text-[var(--chelsea-blue)] transition-colors">
+      <nav className="flex items-center gap-2 text-xs sm:text-sm text-slate-600 overflow-x-auto pb-2 sm:pb-0">
+        <Link href="/" className="hover:text-[var(--chelsea-blue)] transition-colors whitespace-nowrap">
           Home
         </Link>
-        <span>/</span>
-        <Link href="/cars" className="hover:text-[var(--chelsea-blue)] transition-colors">
+        <span className="flex-shrink-0">/</span>
+        <Link href="/cars" className="hover:text-[var(--chelsea-blue)] transition-colors whitespace-nowrap">
           Cars
         </Link>
-        <span>/</span>
-        <span className="text-slate-900">{vehicle.title}</span>
+        <span className="flex-shrink-0">/</span>
+        <span className="text-slate-900 truncate">{vehicle.title}</span>
       </nav>
 
       {/* Back Button */}
@@ -67,16 +67,16 @@ export default async function CarDetailPage({ params }: Props) {
         href="/cars"
         className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--chelsea-blue)] hover:text-[var(--orange-cta)] transition-colors"
       >
-        <ChevronLeft className="h-4 w-4" />
+        <ChevronLeft className="h-4 w-4 flex-shrink-0" />
         Back to all cars
       </Link>
 
       {/* Header */}
       <header className="space-y-4">
-        <div className="flex flex-wrap items-start justify-between gap-4">
-          <div className="space-y-2">
-            <h1 className="text-3xl font-bold text-[var(--chelsea-blue)] md:text-4xl">{vehicle.title}</h1>
-            <div className="flex flex-wrap items-center gap-3 text-sm text-slate-600">
+        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+          <div className="space-y-2 flex-1 min-w-0">
+            <h1 className="text-2xl font-bold text-[var(--chelsea-blue)] sm:text-3xl lg:text-4xl break-words">{vehicle.title}</h1>
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-sm text-slate-600">
               <span
                 className={`rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wide ${
                   vehicle.status === "In Stock"
@@ -95,8 +95,8 @@ export default async function CarDetailPage({ params }: Props) {
               )}
             </div>
           </div>
-          <div className="text-right">
-            <p className="text-3xl font-bold text-[var(--chelsea-blue)] md:text-4xl">
+          <div className="text-left sm:text-right flex-shrink-0">
+            <p className="text-2xl font-bold text-[var(--chelsea-blue)] sm:text-3xl lg:text-4xl">
               £{vehicle.price.toLocaleString()}
             </p>
             {vehicle.listPrice && vehicle.listPrice > vehicle.price && (
@@ -143,13 +143,13 @@ export default async function CarDetailPage({ params }: Props) {
         )}
       </section>
 
-      <div className="grid gap-8 lg:grid-cols-3">
+      <div className="grid gap-6 lg:gap-8 lg:grid-cols-3">
         {/* Main Content */}
-        <div className="space-y-8 lg:col-span-2">
+        <div className="space-y-6 lg:space-y-8 lg:col-span-2">
           {/* Key Specifications */}
-          <section className="glass-panel p-6 space-y-4">
-            <h2 className="text-xl font-bold text-[var(--chelsea-blue)]">Key Specifications</h2>
-            <div className="grid grid-cols-2 gap-4 text-sm md:grid-cols-3">
+          <section className="glass-panel p-4 sm:p-6 space-y-4">
+            <h2 className="text-lg sm:text-xl font-bold text-[var(--chelsea-blue)]">Key Specifications</h2>
+            <div className="grid grid-cols-2 gap-3 sm:gap-4 text-sm md:grid-cols-3">
               <div className="space-y-1">
                 <p className="text-xs uppercase tracking-wide text-slate-500">Year</p>
                 <p className="font-semibold text-slate-900">{vehicle.year}</p>
@@ -182,15 +182,15 @@ export default async function CarDetailPage({ params }: Props) {
           </section>
 
           {/* Description */}
-          <section className="glass-panel p-6 space-y-4">
-            <h2 className="text-xl font-bold text-[var(--chelsea-blue)]">Description</h2>
+          <section className="glass-panel p-4 sm:p-6 space-y-4">
+            <h2 className="text-lg sm:text-xl font-bold text-[var(--chelsea-blue)]">Description</h2>
             <p className="text-sm leading-relaxed text-slate-700">{vehicle.description}</p>
           </section>
 
           {/* Features */}
           {vehicle.features && vehicle.features.length > 0 && (
-            <section className="glass-panel p-6 space-y-4">
-              <h2 className="text-xl font-bold text-[var(--chelsea-blue)]">Features & Equipment</h2>
+            <section className="glass-panel p-4 sm:p-6 space-y-4">
+              <h2 className="text-lg sm:text-xl font-bold text-[var(--chelsea-blue)]">Features & Equipment</h2>
               <ul className="grid gap-2 text-sm md:grid-cols-2">
                 {vehicle.features.map((feature) => (
                   <li key={feature} className="flex items-start gap-2">
@@ -204,8 +204,8 @@ export default async function CarDetailPage({ params }: Props) {
 
           {/* Compliance Information */}
           {vehicle.complianceNotes && (
-            <section className="glass-panel p-6 space-y-4 bg-blue-50 border-blue-200">
-              <h2 className="text-xl font-bold text-[var(--chelsea-blue)]">Compliance & Tax Information</h2>
+            <section className="glass-panel p-4 sm:p-6 space-y-4 bg-blue-50 border-blue-200">
+              <h2 className="text-lg sm:text-xl font-bold text-[var(--chelsea-blue)]">Compliance & Tax Information</h2>
               <p className="text-sm leading-relaxed text-slate-700">{vehicle.complianceNotes}</p>
             </section>
           )}
@@ -213,23 +213,23 @@ export default async function CarDetailPage({ params }: Props) {
 
         {/* Sidebar - Contact CTA */}
         <div className="lg:col-span-1">
-          <div className="glass-panel p-6 space-y-6 sticky top-4">
-            <h3 className="text-lg font-bold text-[var(--chelsea-blue)]">Interested in this vehicle?</h3>
+          <div className="glass-panel p-4 sm:p-6 space-y-4 sm:space-y-6 lg:sticky lg:top-20">
+            <h3 className="text-base sm:text-lg font-bold text-[var(--chelsea-blue)]">Interested in this vehicle?</h3>
             <div className="space-y-3">
               <Link
                 href={`/contact?vehicle=${encodeURIComponent(vehicle.title)}`}
-                className="cta-primary flex w-full items-center justify-center gap-2 rounded-full px-6 py-4 text-center font-semibold"
+                className="cta-primary flex w-full items-center justify-center gap-2 rounded-full px-4 py-3 sm:px-6 sm:py-4 text-sm sm:text-base text-center font-semibold"
               >
-                <Mail className="h-5 w-5" />
-                Send Enquiry
+                <Mail className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
+                <span>Send Enquiry</span>
               </Link>
               {siteInfo?.phone && (
                 <a
                   href={`tel:${siteInfo.phone}`}
-                  className="flex w-full items-center justify-center gap-2 rounded-full border-2 border-[var(--chelsea-blue)] px-6 py-4 text-center font-semibold text-[var(--chelsea-blue)] hover:bg-[var(--chelsea-blue)] hover:text-white transition-all"
+                  className="flex w-full items-center justify-center gap-2 rounded-full border-2 border-[var(--chelsea-blue)] px-4 py-3 sm:px-6 sm:py-4 text-sm sm:text-base text-center font-semibold text-[var(--chelsea-blue)] hover:bg-[var(--chelsea-blue)] hover:text-white transition-all"
                 >
-                  <Phone className="h-5 w-5" />
-                  {siteInfo.phone}
+                  <Phone className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
+                  <span className="break-all">{siteInfo.phone}</span>
                 </a>
               )}
             </div>
@@ -266,18 +266,18 @@ export default async function CarDetailPage({ params }: Props) {
       </div>
 
       {/* Bottom CTA */}
-      <section className="glass-panel p-8 text-center space-y-4">
-        <h3 className="text-2xl font-bold text-[var(--chelsea-blue)]">Need something different?</h3>
+      <section className="glass-panel p-6 sm:p-8 text-center space-y-4">
+        <h3 className="text-xl sm:text-2xl font-bold text-[var(--chelsea-blue)]">Need something different?</h3>
         <p className="text-sm text-slate-600 max-w-2xl mx-auto">
           Phil can source vehicles to your exact specifications and certify them in our upstairs bays before delivery.
         </p>
-        <div className="flex flex-wrap justify-center gap-3">
-          <Link href="/contact" className="cta-primary rounded-full px-8 py-3 font-semibold">
+        <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3">
+          <Link href="/contact" className="cta-primary rounded-full px-6 py-3 sm:px-8 text-sm sm:text-base font-semibold">
             Request Sourcing
           </Link>
           <Link
             href="/cars"
-            className="rounded-full border-2 border-[var(--chelsea-blue)] px-8 py-3 font-semibold text-[var(--chelsea-blue)] hover:bg-[var(--chelsea-blue)] hover:text-white transition-all"
+            className="rounded-full border-2 border-[var(--chelsea-blue)] px-6 py-3 sm:px-8 text-sm sm:text-base font-semibold text-[var(--chelsea-blue)] hover:bg-[var(--chelsea-blue)] hover:text-white transition-all"
           >
             View All Stock
           </Link>

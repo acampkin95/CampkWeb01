@@ -151,7 +151,7 @@ export default async function RootLayout({
           {JSON.stringify(structuredData)}
         </Script>
         <SiteHeader siteInfo={siteInfo} theme={theme} />
-        <main id="main-content" className="mx-auto min-h-screen max-w-6xl space-y-12 px-6 py-12">
+        <main id="main-content" className="mx-auto min-h-screen max-w-6xl space-y-8 px-4 py-6 sm:space-y-12 sm:px-6 sm:py-12">
           {children}
         </main>
         <SiteFooter siteInfo={siteInfo} theme={theme} />
