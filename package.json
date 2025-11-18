@@ -8,28 +8,50 @@
     "start": "next start",
     "lint": "eslint",
     "lint:strict": "eslint --max-warnings=0 .",
-    "audit": "npm audit --omit=dev"
+    "audit": "npm audit --omit=dev",
+    "db:generate": "prisma generate",
+    "db:push": "prisma db push",
+    "db:migrate": "prisma migrate dev",
+    "db:migrate:prod": "prisma migrate deploy",
+    "db:studio": "prisma studio",
+    "db:seed": "tsx scripts/migrate-json-to-db.ts",
+    "db:seed:vehicles": "tsx scripts/seed-uk-vehicles.ts",
+    "db:seed:all": "npm run db:seed && npm run db:seed:vehicles",
+    "db:reset": "prisma migrate reset && npm run db:seed:all",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
+    "@prisma/client": "^6.19.0",
     "@types/pdfkit": "^0.17.3",
+    "@vercel/analytics": "^1.5.0",
+    "cloudinary": "^2.8.0",
+    "clsx": "^2.1.1",
+    "dotenv": "^17.2.3",
     "next": "16.0.1",
+    "next-cloudinary": "^6.17.5",
     "pdfkit": "^0.17.2",
+    "prisma": "^6.19.0",
     "react": "19.2.0",
     "react-dom": "19.2.0",
     "sharp": "^0.34.5",
-    "zod": "^4.1.12"
+    "tailwind-merge": "^3.4.0",
+    "zod": "^4.1.12",
+    "zod-prisma-types": "^3.3.5"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@types/bcrypt": "^6.0.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "bcrypt": "^6.0.0",
     "eslint": "^9",
     "eslint-config-next": "16.0.1",
     "eslint-plugin-security": "^3.0.1",
     "eslint-plugin-unicorn": "^62.0.0",
     "tailwindcss": "^4",
+    "tsx": "^4.20.6",
     "typescript": "^5"
   }
 }

@@ -2,6 +2,7 @@ import type { CSSProperties } from "react";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
@@ -169,6 +170,7 @@ export default async function RootLayout({
           {children}
         </main>
         <SiteFooter siteInfo={siteInfo} theme={theme} />
+        <Analytics />
       </body>
     </html>
   );

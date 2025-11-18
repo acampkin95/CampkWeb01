@@ -1,9 +1,10 @@
 import { NextResponse } from "next/server";
 import { createSessionToken, sessionCookieName, sessionMaxAge, verifyPasscode } from "@/lib/auth";
 import { rateLimit } from "@/lib/rateLimit";
+import { ADMIN_RATE_LIMIT_WINDOW_MS } from "@/lib/constants";
 
 const RATE_LIMIT_MAX = Number(process.env.ADMIN_RATE_LIMIT ?? "10");
-const RATE_LIMIT_WINDOW_MS = Number(process.env.ADMIN_RATE_WINDOW_MS ?? `${10 * 60 * 1000}`); // 10 minutes
+const RATE_LIMIT_WINDOW_MS = Number(process.env.ADMIN_RATE_WINDOW_MS ?? ADMIN_RATE_LIMIT_WINDOW_MS);
 
 function getClientIdentifier(request: Request): string {
   const forwarded = request.headers.get("x-forwarded-for");
@@ -24,24 +25,29 @@ export async function POST(request: Request) {
     );
   }
 
-  const { passcode } = await request.json();
+  try {
+    const { passcode } = await request.json();
 
-  if (!passcode || !verifyPasscode(passcode)) {
-    return NextResponse.json({ message: "Incorrect passcode" }, { status: 401 });
+    if (!passcode || !verifyPasscode(passcode)) {
+      return NextResponse.json({ message: "Incorrect passcode" }, { status: 401 });
+    }
+
+    const token = createSessionToken();
+    const response = NextResponse.json({ success: true });
+    response.cookies.set({
+      name: sessionCookieName,
+      value: token,
+      httpOnly: true,
+      sameSite: "strict",
+      secure: process.env.NODE_ENV === "production",
+      maxAge: sessionMaxAge,
+      path: "/",
+    });
+    return response;
+  } catch (error) {
+    console.error("Auth request failed", error);
+    return NextResponse.json({ message: "Invalid request" }, { status: 400 });
   }
-
-  const token = createSessionToken();
-  const response = NextResponse.json({ success: true });
-  response.cookies.set({
-    name: sessionCookieName,
-    value: token,
-    httpOnly: true,
-    sameSite: "strict",
-    secure: process.env.NODE_ENV === "production",
-    maxAge: sessionMaxAge,
-    path: "/",
-  });
-  return response;
 }
 
 export async function DELETE() {

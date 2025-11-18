@@ -30,15 +30,22 @@ export async function GET() {
   return NextResponse.json({ leads });
 }
 
-export async function POST(request: Request) {
-  // Rate limit: 10 submissions per hour per IP
-  const clientId = `leads:${getClientIdentifier(request)}`;
-  const { limited, retryAfter } = rateLimit(clientId, 60 * 60 * 1000, 10);
+function getClientIdentifier(request: Request) {
+  const forwarded = request.headers.get("x-forwarded-for") ?? "";
+  if (forwarded) {
+    return forwarded.split(",")[0]!.trim();
+  }
+  return request.headers.get("x-real-ip") ?? "local";
+}
 
+export async function POST(request: Request) {
+  // Rate limit: 5 submissions per 10 minutes per IP
+  const clientId = `lead:${getClientIdentifier(request)}`;
+  const { limited, retryAfter } = rateLimit(clientId, LEAD_RATE_LIMIT_WINDOW_MS, 5);
   if (limited) {
     return NextResponse.json(
-      { message: "Too many submissions. Please try again later." },
-      { status: 429, headers: retryAfter ? { "Retry-After": `${Math.ceil(retryAfter / 1000)}` } : undefined }
+      { message: "Too many submissions. Please wait before trying again." },
+      { status: 429, headers: retryAfter ? { "Retry-After": `${Math.ceil(retryAfter / 1000)}` } : undefined },
     );
   }
 
@@ -49,6 +56,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ success: true, lead });
   } catch (error) {
     console.error("Lead submission failed", error);
-    return NextResponse.json({ message: "Invalid lead", details: `${error}` }, { status: 400 });
+    const details = process.env.NODE_ENV === "production" ? undefined : `${error}`;
+    return NextResponse.json({ message: "Invalid lead", ...(details && { details }) }, { status: 400 });
   }
 }
