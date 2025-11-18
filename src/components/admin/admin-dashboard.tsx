@@ -6,6 +6,8 @@ import { CmsData, HeroStat, ServiceItem, VehicleListing, WarehouseSection } from
 import { LeadInbox } from "@/components/admin/lead-inbox";
 import { VehicleComplianceWidget } from "@/components/admin/vehicle-compliance-widget";
 import { MediaLibrary } from "@/components/admin/media-library";
+import { CarChecker } from "@/components/admin/car-checker";
+import { NewCarSale } from "@/components/admin/new-car-sale";
 
 type PerformanceStat = NonNullable<CmsData["performance"]>["stats"][number];
 
@@ -87,6 +89,7 @@ const hubModules = [
 
 export function AdminDashboard({ initialData }: { initialData: CmsData }) {
   const [nav, setNav] = useState<NavKey>("hub");
+  const [vehicleSubNav, setVehicleSubNav] = useState<"stock" | "new-sale" | "checker">("stock");
   const router = useRouter();
   const [formData, setFormData] = useState<CmsData>(initialData);
   const [isSaving, setIsSaving] = useState(false);
@@ -1155,6 +1158,40 @@ export function AdminDashboard({ initialData }: { initialData: CmsData }) {
 
           {nav === "vehicles" && (
             <>
+      {/* Vehicle Sub-Navigation */}
+      <section className="rounded-3xl border border-slate-200 bg-white p-6">
+        <div className="flex flex-wrap gap-2">
+          <button
+            type="button"
+            onClick={() => setVehicleSubNav("stock")}
+            className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
+              vehicleSubNav === "stock" ? "bg-slate-900 text-white" : "border border-slate-200 bg-white text-slate-600"
+            }`}
+          >
+            Stock Management
+          </button>
+          <button
+            type="button"
+            onClick={() => setVehicleSubNav("new-sale")}
+            className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
+              vehicleSubNav === "new-sale" ? "bg-slate-900 text-white" : "border border-slate-200 bg-white text-slate-600"
+            }`}
+          >
+            New Car Sale
+          </button>
+          <button
+            type="button"
+            onClick={() => setVehicleSubNav("checker")}
+            className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
+              vehicleSubNav === "checker" ? "bg-slate-900 text-white" : "border border-slate-200 bg-white text-slate-600"
+            }`}
+          >
+            Car Checker
+          </button>
+        </div>
+      </section>
+
+      {vehicleSubNav === "stock" && (
       <section className="space-y-4 rounded-3xl border border-slate-200 bg-white p-8">
         <header className="flex items-center justify-between">
           <div>
@@ -1286,6 +1323,19 @@ export function AdminDashboard({ initialData }: { initialData: CmsData }) {
           ))}
         </div>
       </section>
+      )}
+
+      {vehicleSubNav === "new-sale" && (
+        <section className="rounded-3xl border border-slate-200 bg-white p-8">
+          <NewCarSale />
+        </section>
+      )}
+
+      {vehicleSubNav === "checker" && (
+        <section className="rounded-3xl border border-slate-200 bg-white p-8">
+          <CarChecker />
+        </section>
+      )}
 
       <LeadInbox />
             </>
