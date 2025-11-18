@@ -2,6 +2,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { getCmsData } from "@/lib/dataStore";
 import { AdminDashboard } from "@/components/admin/admin-dashboard";
+import { sessionCookieName } from "@/lib/auth-shared";
 
 export const metadata = {
   title: "Admin | Campkin",
@@ -9,7 +10,7 @@ export const metadata = {
 
 export default async function AdminPage() {
   const cookieStore = await cookies();
-  const token = cookieStore.get("campkin_admin");
+  const token = cookieStore.get(sessionCookieName);
   if (!token) {
     redirect("/login?redirect=/admin");
   }

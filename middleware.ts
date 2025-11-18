@@ -5,8 +5,9 @@ export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const isAdminArea = pathname.startsWith("/admin");
   const isCmsWrite = pathname.startsWith("/api/cms") && request.method !== "GET";
+  const isMediaEndpoint = pathname.startsWith("/api/media");
 
-  if (isAdminArea || isCmsWrite) {
+  if (isAdminArea || isCmsWrite || isMediaEndpoint) {
     const token = request.cookies.get(sessionCookieName)?.value;
     const valid = await verifySessionTokenEdge(token);
     if (!valid) {
@@ -24,5 +25,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/admin/:path*", "/api/cms"],
+  matcher: ["/admin/:path*", "/api/cms", "/api/media"],
 };

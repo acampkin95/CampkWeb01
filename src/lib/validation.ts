@@ -77,13 +77,28 @@ export const faqSchema = z.object({
 });
 
 export const leadSchema = z.object({
-  channel: z.enum(["warehouse", "vehicle"]),
+  channel: z.enum(["warehouse", "vehicle", "general"]),
   name: z.string().min(2),
   email: z.string().email(),
   phone: z.string().optional(),
   company: z.string().optional(),
   message: z.string().optional(),
   vehicleId: z.string().optional(),
+});
+
+export const buyingRequestSchema = z.object({
+  vrm: z.string().optional(),
+  make: z.string().optional(),
+  model: z.string().optional(),
+  year: z.number().int().min(1980).max(new Date().getFullYear() + 1).optional(),
+  mileage: z.number().int().min(0).optional(),
+  askingPrice: z.number().min(0).optional(),
+  damage: z.record(z.enum(["bodywork", "interior", "mechanical"]), z.number().min(1).max(5)).optional(),
+  notes: z.string().optional(),
+});
+
+export const vehicleLookupSchema = z.object({
+  vrm: z.string().min(1, "VRM is required"),
 });
 
 export const cmsSchema = z.object({

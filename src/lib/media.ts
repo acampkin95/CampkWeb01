@@ -66,7 +66,25 @@ export async function saveMedia(originalName: string, fileBuffer: Buffer): Promi
 
 export async function deleteMedia(filename: string) {
   await ensureDir();
-  const filePath = path.join(uploadDir, path.basename(filename));
+
+  // Sanitize filename thoroughly - only allow alphanumeric, dots, hyphens, underscores
+  const basename = path.basename(filename);
+  const sanitized = basename.replace(/[^a-zA-Z0-9._-]/g, '');
+
+  if (!sanitized || sanitized !== basename) {
+    throw new Error('Invalid filename');
+  }
+
+  const filePath = path.join(uploadDir, sanitized);
+
+  // Verify the resolved path is still within uploadDir
+  const resolvedPath = path.resolve(filePath);
+  const resolvedUploadDir = path.resolve(uploadDir);
+
+  if (!resolvedPath.startsWith(resolvedUploadDir + path.sep)) {
+    throw new Error('Invalid file path');
+  }
+
   // eslint-disable-next-line security/detect-non-literal-fs-filename
   await fs.unlink(filePath);
 }

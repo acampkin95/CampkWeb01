@@ -8,6 +8,9 @@ export async function GET() {
   return NextResponse.json({ assets });
 }
 
+const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
+const ALLOWED_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif'];
+
 export async function POST(request: Request) {
   try {
     const formData = await request.formData();
@@ -15,6 +18,17 @@ export async function POST(request: Request) {
     if (!(file instanceof Blob)) {
       return NextResponse.json({ message: "Missing file" }, { status: 400 });
     }
+
+    // Validate file size
+    if (file.size > MAX_FILE_SIZE) {
+      return NextResponse.json({ message: "File too large (max 10MB)" }, { status: 400 });
+    }
+
+    // Validate file type
+    if (!ALLOWED_TYPES.includes(file.type)) {
+      return NextResponse.json({ message: "Invalid file type. Only images (JPEG, PNG, WebP, GIF) are allowed" }, { status: 400 });
+    }
+
     const filename = (formData.get("name") as string) || (file as File).name || "upload";
     const arrayBuffer = await file.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);

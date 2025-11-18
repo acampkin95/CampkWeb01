@@ -1,4 +1,4 @@
-export type LeadChannel = "warehouse" | "vehicle";
+export type LeadChannel = "warehouse" | "vehicle" | "general";
 
 export type LeadInput = {
   channel: LeadChannel;

@@ -3,6 +3,7 @@ import { cookies } from "next/headers";
 import { revalidatePath } from "next/cache";
 import { cmsSchema } from "@/lib/validation";
 import { getCmsData, saveCmsData } from "@/lib/dataStore";
+import { sessionCookieName } from "@/lib/auth-shared";
 
 export const dynamic = "force-dynamic";
 
@@ -14,7 +15,7 @@ export async function GET() {
 export async function PUT(request: Request) {
   try {
     const cookieStore = await cookies();
-    const cookie = cookieStore.get("campkin_admin");
+    const cookie = cookieStore.get(sessionCookieName);
     if (!cookie) {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
