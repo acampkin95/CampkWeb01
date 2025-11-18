@@ -2,6 +2,9 @@ import Link from "next/link";
 import { getCmsData } from "@/lib/dataStore";
 import { Hero } from "@/components/sections/hero";
 
+// Enable ISR with 1 hour revalidation
+export const revalidate = 3600;
+
 export default async function Home() {
   const data = await getCmsData();
   const bays = data.warehouse.sections;

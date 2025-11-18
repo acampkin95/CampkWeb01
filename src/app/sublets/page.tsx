@@ -5,6 +5,9 @@ export const metadata = {
   title: "Sublet listings | Campkin",
 };
 
+// Enable ISR with 1 hour revalidation
+export const revalidate = 3600;
+
 export default async function SubletsPage() {
   const data = await getCmsData();
   const sections = data.warehouse.sections;

@@ -30,6 +30,7 @@ export async function PUT(request: Request) {
     return NextResponse.json(parsed);
   } catch (error) {
     console.error("Admin save failed", error);
-    return NextResponse.json({ message: "Invalid payload", details: `${error}` }, { status: 400 });
+    const details = process.env.NODE_ENV === "production" ? undefined : `${error}`;
+    return NextResponse.json({ message: "Invalid payload", ...(details && { details }) }, { status: 400 });
   }
 }

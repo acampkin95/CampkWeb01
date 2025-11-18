@@ -1,12 +1,12 @@
 import { promises as fs } from "node:fs";
 import path from "node:path";
 import { CmsData } from "@/types/cms";
+import { CMS_CACHE_TTL_MS } from "./constants";
 
 const dataPath = path.join(process.cwd(), "data", "cms.json");
 
 let cachedCms: CmsData | null = null;
 let lastLoaded = 0;
-const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
 
 async function readCmsFromDisk() {
   const file = await fs.readFile(dataPath, "utf-8");
@@ -16,7 +16,7 @@ async function readCmsFromDisk() {
 }
 
 export async function getCmsData(): Promise<CmsData> {
-  if (!cachedCms || Date.now() - lastLoaded > CACHE_TTL) {
+  if (!cachedCms || Date.now() - lastLoaded > CMS_CACHE_TTL_MS) {
     await readCmsFromDisk();
   }
   return structuredClone(cachedCms!);
