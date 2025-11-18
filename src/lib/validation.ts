@@ -86,6 +86,21 @@ export const leadSchema = z.object({
   vehicleId: z.string().optional(),
 });
 
+export const buyingRequestSchema = z.object({
+  vrm: z.string().optional(),
+  make: z.string().optional(),
+  model: z.string().optional(),
+  year: z.number().int().min(1980).max(new Date().getFullYear() + 1).optional(),
+  mileage: z.number().int().min(0).optional(),
+  askingPrice: z.number().min(0).optional(),
+  damage: z.record(z.enum(["bodywork", "interior", "mechanical"]), z.number().min(1).max(5)).optional(),
+  notes: z.string().optional(),
+});
+
+export const vehicleLookupSchema = z.object({
+  vrm: z.string().min(1, "VRM is required"),
+});
+
 export const cmsSchema = z.object({
   siteInfo: z.object({
     heroTitle: z.string(),

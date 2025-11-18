@@ -2,12 +2,21 @@ import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import { addLead, listLeads } from "@/lib/leadStore";
 import { leadSchema } from "@/lib/validation";
+import { sessionCookieName } from "@/lib/auth-shared";
 import { rateLimit } from "@/lib/rateLimit";
-import { LEAD_RATE_LIMIT_WINDOW_MS } from "@/lib/constants";
+
+function getClientIdentifier(request: Request): string {
+  const forwarded = request.headers.get("x-forwarded-for");
+  if (forwarded) {
+    const firstIp = forwarded.split(",")[0];
+    return firstIp ? firstIp.trim() : "unknown";
+  }
+  return request.headers.get("x-real-ip") ?? "unknown";
+}
 
 async function requireAdmin() {
   const cookieStore = await cookies();
-  const token = cookieStore.get("campkin_session");
+  const token = cookieStore.get(sessionCookieName);
   if (!token) {
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
   }

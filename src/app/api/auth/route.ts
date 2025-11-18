@@ -6,10 +6,11 @@ import { ADMIN_RATE_LIMIT_WINDOW_MS } from "@/lib/constants";
 const RATE_LIMIT_MAX = Number(process.env.ADMIN_RATE_LIMIT ?? "10");
 const RATE_LIMIT_WINDOW_MS = Number(process.env.ADMIN_RATE_WINDOW_MS ?? ADMIN_RATE_LIMIT_WINDOW_MS);
 
-function getClientIdentifier(request: Request) {
-  const forwarded = request.headers.get("x-forwarded-for") ?? "";
+function getClientIdentifier(request: Request): string {
+  const forwarded = request.headers.get("x-forwarded-for");
   if (forwarded) {
-    return forwarded.split(",")[0]!.trim();
+    const firstIp = forwarded.split(",")[0];
+    return firstIp ? firstIp.trim() : "local";
   }
   return request.headers.get("x-real-ip") ?? "local";
 }
