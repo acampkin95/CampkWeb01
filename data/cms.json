@@ -166,209 +166,325 @@
   "vehicles": [
     {
       "id": "stk2401",
-      "title": "2021 BMW 330e M Sport Pro",
-      "price": 28995,
-      "mileage": 21450,
-      "fuel": "Hybrid Petrol",
-      "transmission": "Automatic",
-      "year": 2021,
+      "title": "2015 Ford Fiesta Zetec 1.0 EcoBoost",
+      "price": 5995,
+      "listPrice": 13995,
+      "mileage": 68500,
+      "fuel": "Petrol",
+      "transmission": "Manual",
+      "year": 2015,
+      "vrm": "FD15KPM",
       "images": [
-        "https://images.unsplash.com/photo-1503736334956-4c8f8e92946d",
-        "https://images.unsplash.com/photo-1503376780353-7e6692767b70",
-        "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7"
+        "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1583267746897-82d1b06ccb15?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1590362891991-f776e747a588?auto=format&fit=crop&w=1200&q=80"
       ],
-      "description": "1 owner, Pro Pack, Tech Plus, 12m warranty.",
+      "description": "Popular supermini with economical 1.0L EcoBoost engine. Full service history, Bluetooth, DAB radio. Ideal first car or town runabout. HPI clear, 12-month warranty included.",
       "status": "In Stock",
-      "body": "Saloon",
-      "colour": "Portimao Blue",
+      "body": "Hatchback",
+      "colour": "Race Red",
       "features": [
-        "Heated seats",
-        "HUD",
-        "Adaptive LED"
+        "1.0L EcoBoost 100PS",
+        "Bluetooth connectivity",
+        "DAB digital radio",
+        "Air conditioning",
+        "Electric windows",
+        "USB/AUX input"
       ],
-      "vrm": "LC21CMP",
-      "listPrice": 42995,
-      "complianceNotes": "ULEZ & CAZ clear 08 Nov 2025; BMW battery warranty to 2029.",
+      "complianceNotes": "ULEZ compliant. Road tax £20/year. Euro 5 emissions standard.",
       "complianceProofs": [
         {
           "id": "proof-stk2401-1",
-          "type": "DVSA MOT Cert",
-          "reference": "DVSA/112233",
-          "addedAt": "2025-09-12T10:00:00Z"
-        },
-        {
-          "id": "proof-stk2401-2",
-          "type": "BMW Battery Health",
-          "reference": "BMW-iPerformance/5566",
-          "url": "https://example.com/reports/bmw330e-battery.pdf",
-          "addedAt": "2025-10-05T11:30:00Z"
+          "type": "HPI Check",
+          "reference": "HPI/FD15-8844",
+          "addedAt": "2025-10-15T09:00:00Z"
         }
       ],
       "complianceHistory": [
         {
-          "id": "snapshot-stk2401-20251005",
-          "vrm": "LC21CMP",
-          "recordedAt": "2025-10-05T11:30:00Z",
-          "summary": "ULEZ/CAZ clear confirmed",
+          "id": "snapshot-stk2401-20251015",
+          "vrm": "FD15KPM",
+          "recordedAt": "2025-10-15T09:00:00Z",
+          "summary": "ULEZ compliant, low tax bracket",
           "tax": {
             "regime": "modern",
-            "firstYearRate": 130,
-            "totalAnnual": 605,
-            "expensiveCarSupplement": 410
+            "firstYearRate": 120,
+            "totalAnnual": 20,
+            "expensiveCarSupplement": null
           },
           "ulez": "Compliant",
           "caz": "Compliant",
-          "notes": "Battery certificate on file"
+          "notes": "Ford service history verified"
         }
       ]
     },
     {
       "id": "stk2402",
-      "title": "2019 Ford Transit Custom Limited L2",
-      "price": 17950,
-      "mileage": 48210,
-      "fuel": "Diesel",
+      "title": "2014 Volkswagen Polo 1.2 TSI Match",
+      "price": 5495,
+      "listPrice": 12950,
+      "mileage": 72100,
+      "fuel": "Petrol",
       "transmission": "Manual",
-      "year": 2019,
+      "year": 2014,
+      "vrm": "VW14PMX",
       "images": [
-        "https://images.unsplash.com/photo-1489515217757-5fd1be406fef",
-        "https://images.unsplash.com/photo-1511919884226-fd3cad34687c",
-        "https://images.unsplash.com/photo-1469474968028-56623f02e42e"
+        "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1621939514649-280e2ee25f60?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1619976215249-59a4f0b28cb8?auto=format&fit=crop&w=1200&q=80"
       ],
-      "description": "Twin side doors, racking, Euro 6.",
-      "status": "Reserved",
-      "body": "Panel Van",
-      "colour": "Frozen White",
+      "description": "Reliable German engineering in excellent condition. 2 previous owners, full VW service history. Touchscreen media system, parking sensors, cruise control. Clean interior, no smoker.",
+      "status": "In Stock",
+      "body": "Hatchback",
+      "colour": "Reflex Silver",
       "features": [
-        "Heated windscreen",
-        "Apple CarPlay"
+        "1.2 TSI 90PS engine",
+        "Touchscreen infotainment",
+        "Parking sensors",
+        "Cruise control",
+        "Climate control",
+        "Alloy wheels"
       ],
-      "vrm": "WF69CAMP",
-      "listPrice": 35695,
-      "complianceNotes": "Euro 6.2 diesel. Birmingham & Portsmouth CAZ ready.",
+      "complianceNotes": "ULEZ compliant. VW warranty transferable. Recent MOT with no advisories.",
       "complianceProofs": [
         {
           "id": "proof-stk2402-1",
-          "type": "HPI Finance Clearance",
-          "reference": "HPI/TRANSIT-2209",
-          "addedAt": "2025-09-18T12:15:00Z"
+          "type": "VW Service Book",
+          "reference": "VW-HIST/2014-PMX",
+          "addedAt": "2025-10-18T14:30:00Z"
         }
       ],
       "complianceHistory": [
         {
-          "id": "snapshot-stk2402-20250918",
-          "vrm": "WF69CAMP",
-          "recordedAt": "2025-09-18T12:15:00Z",
-          "summary": "Euro 6.2 diesel \u2013 CAZ pass",
+          "id": "snapshot-stk2402-20251018",
+          "vrm": "VW14PMX",
+          "recordedAt": "2025-10-18T14:30:00Z",
+          "summary": "Clean MOT, ULEZ compliant",
           "tax": {
             "regime": "modern",
-            "firstYearRate": 1360,
-            "totalAnnual": 605,
+            "firstYearRate": 110,
+            "totalAnnual": 165,
             "expensiveCarSupplement": null
           },
           "ulez": "Compliant",
           "caz": "Compliant",
-          "notes": "Euro 6.2 certificate attached"
+          "notes": "MOT valid until Aug 2026"
         }
       ]
     },
     {
       "id": "stk2403",
-      "title": "2022 Kia EV6 GT-Line",
-      "price": 38995,
-      "mileage": 11200,
-      "fuel": "Electric",
-      "transmission": "Automatic",
-      "year": 2022,
+      "title": "2016 Vauxhall Corsa 1.4 SRi VX-Line",
+      "price": 6295,
+      "listPrice": 14500,
+      "mileage": 58900,
+      "fuel": "Petrol",
+      "transmission": "Manual",
+      "year": 2016,
+      "vrm": "VX16SRI",
       "images": [
-        "https://images.unsplash.com/photo-1619681740098-9b38d50b021b",
-        "https://images.unsplash.com/photo-1502877338535-766e1452684a",
-        "https://images.unsplash.com/photo-1542291026-7eec264c27ff"
+        "https://images.unsplash.com/photo-1609521263047-f8f205293f24?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1625231334168-35067f8853ed?auto=format&fit=crop&w=1200&q=80"
       ],
-      "description": "Ultra-fast charging, heat pump, warranty to 2029.",
+      "description": "Sporty SRi VX-Line edition with body kit and upgraded interior. Apple CarPlay, heated seats, sports suspension. One owner from new. Recently serviced, fresh MOT, excellent condition throughout.",
       "status": "In Stock",
-      "body": "Crossover",
-      "colour": "Interstellar Grey",
+      "body": "Hatchback",
+      "colour": "Carbon Flash Black",
       "features": [
-        "Meridian audio",
-        "ADAS pack"
+        "Apple CarPlay/Android Auto",
+        "Heated front seats",
+        "Sports suspension",
+        "17-inch alloys",
+        "Rear parking camera",
+        "Leather steering wheel"
       ],
-      "vrm": "EV22CAMP",
-      "listPrice": 57500,
-      "complianceNotes": "Zero-emission GT-Line. Exempt from ULEZ / CAZ charges.",
+      "complianceNotes": "ULEZ compliant. Euro 6 emissions. Full Vauxhall service history maintained.",
       "complianceProofs": [
         {
           "id": "proof-stk2403-1",
-          "type": "ZEV Certificate",
-          "reference": "KIA/EV6/ZEV-2025",
-          "addedAt": "2025-10-22T09:45:00Z"
+          "type": "Vauxhall Warranty",
+          "reference": "VX-WARR/2016-SRI",
+          "addedAt": "2025-10-20T11:15:00Z"
         }
       ],
       "complianceHistory": [
         {
-          "id": "snapshot-stk2403-20251022",
-          "vrm": "EV22CAMP",
-          "recordedAt": "2025-10-22T09:45:00Z",
-          "summary": "Zero emissions \u2013 exempt",
+          "id": "snapshot-stk2403-20251020",
+          "vrm": "VX16SRI",
+          "recordedAt": "2025-10-20T11:15:00Z",
+          "summary": "Euro 6 compliant, 1 owner",
           "tax": {
             "regime": "modern",
-            "firstYearRate": 0,
-            "totalAnnual": 0,
+            "firstYearRate": 140,
+            "totalAnnual": 190,
             "expensiveCarSupplement": null
           },
           "ulez": "Compliant",
           "caz": "Compliant",
-          "notes": "Heat pump battery report uploaded"
+          "notes": "Vauxhall service stamp verification complete"
         }
       ]
     },
     {
       "id": "stk2404",
-      "title": "2018 Land Rover Discovery Commercial",
-      "price": 27995,
-      "mileage": 71500,
+      "title": "2013 Peugeot 208 1.4 HDi Active",
+      "price": 4795,
+      "listPrice": 11995,
+      "mileage": 89600,
       "fuel": "Diesel",
-      "transmission": "Automatic",
-      "year": 2018,
+      "transmission": "Manual",
+      "year": 2013,
+      "vrm": "PG13HDI",
       "images": [
-        "https://images.unsplash.com/photo-1502877338535-766e1452684a",
-        "https://images.unsplash.com/photo-1503376780353-7e6692767b70",
-        "https://images.unsplash.com/photo-1503736334956-4c8f8e92946d"
+        "https://images.unsplash.com/photo-1617469767053-d3b523a0b982?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1610884461456-5e5b8bc1002a?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1609340503175-d7b4dfc13f80?auto=format&fit=crop&w=1200&q=80"
       ],
-      "description": "VAT qualifying, 7-seat conversion possible.",
-      "status": "In Prep",
-      "body": "SUV",
-      "colour": "Indus Silver",
+      "description": "Economical diesel supermini averaging 65mpg. Perfect for high-mileage commuters. Touchscreen, Bluetooth, air con. Recent timing belt change at 85k miles. Clean HPI, 2 keys, full history.",
+      "status": "In Stock",
+      "body": "Hatchback",
+      "colour": "Shark Grey",
       "features": [
-        "Air suspension",
-        "360 camera"
+        "1.4 HDi diesel 68bhp",
+        "65+ mpg average",
+        "Touchscreen display",
+        "Bluetooth audio",
+        "Air conditioning",
+        "Timing belt done at 85k"
       ],
-      "vrm": "OV18CAMP",
-      "listPrice": 49950,
-      "complianceNotes": "Check London ULEZ charge until SCR retrofit completed.",
+      "complianceNotes": "ULEZ compliant Euro 5 diesel. £30/year road tax. Recent cambelt service.",
       "complianceProofs": [
         {
           "id": "proof-stk2404-1",
-          "type": "SCR Retrofit Booking",
-          "reference": "EMISSIONS/LRDISC/BOOK-44",
-          "addedAt": "2025-10-12T08:00:00Z"
+          "type": "Timing Belt Receipt",
+          "reference": "TB-PG13/85K",
+          "addedAt": "2025-10-12T16:45:00Z"
         }
       ],
       "complianceHistory": [
         {
           "id": "snapshot-stk2404-20251012",
-          "vrm": "OV18CAMP",
-          "recordedAt": "2025-10-12T08:00:00Z",
-          "summary": "CAZ chargeable until retrofit",
+          "vrm": "PG13HDI",
+          "recordedAt": "2025-10-12T16:45:00Z",
+          "summary": "Euro 5 diesel, ULEZ compliant",
           "tax": {
             "regime": "modern",
-            "firstYearRate": 2190,
-            "totalAnnual": 605,
-            "expensiveCarSupplement": 410
+            "firstYearRate": 20,
+            "totalAnnual": 30,
+            "expensiveCarSupplement": null
           },
-          "ulez": "Chargeable",
-          "caz": "Chargeable",
-          "notes": "Retrofit scheduled for December"
+          "ulez": "Compliant",
+          "caz": "Compliant",
+          "notes": "Major service completed with timing belt"
+        }
+      ]
+    },
+    {
+      "id": "stk2405",
+      "title": "2017 Hyundai i10 1.0 SE",
+      "price": 6795,
+      "listPrice": 9999,
+      "mileage": 41200,
+      "fuel": "Petrol",
+      "transmission": "Manual",
+      "year": 2017,
+      "vrm": "HY17SEL",
+      "images": [
+        "https://images.unsplash.com/photo-1619976218999-907fe454ed45?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1599912027806-124ea8e08519?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?auto=format&fit=crop&w=1200&q=80"
+      ],
+      "description": "Low-mileage city car with excellent reliability record. One owner, Hyundai service history. Air con, electric windows, remote locking. Ideal for new drivers or urban parking. Balance of 5-year warranty remaining.",
+      "status": "In Stock",
+      "body": "Hatchback",
+      "colour": "Pristine White",
+      "features": [
+        "1.0L 3-cylinder 65bhp",
+        "Low insurance group",
+        "Air conditioning",
+        "Electric windows",
+        "Remote central locking",
+        "Hyundai 5-year warranty"
+      ],
+      "complianceNotes": "ULEZ compliant. £20/year road tax. Remaining Hyundai warranty until 2022.",
+      "complianceProofs": [
+        {
+          "id": "proof-stk2405-1",
+          "type": "Hyundai Warranty",
+          "reference": "HY-5YR/2017-SEL",
+          "addedAt": "2025-10-22T10:00:00Z"
+        }
+      ],
+      "complianceHistory": [
+        {
+          "id": "snapshot-stk2405-20251022",
+          "vrm": "HY17SEL",
+          "recordedAt": "2025-10-22T10:00:00Z",
+          "summary": "Low mileage, warranty remaining",
+          "tax": {
+            "regime": "modern",
+            "firstYearRate": 120,
+            "totalAnnual": 20,
+            "expensiveCarSupplement": null
+          },
+          "ulez": "Compliant",
+          "caz": "Compliant",
+          "notes": "Hyundai warranty transferable to new owner"
+        }
+      ]
+    },
+    {
+      "id": "stk2406",
+      "title": "2012 Nissan Micra 1.2 Acenta",
+      "price": 3995,
+      "listPrice": 9950,
+      "mileage": 78300,
+      "fuel": "Petrol",
+      "transmission": "Automatic",
+      "year": 2012,
+      "vrm": "NS12ACT",
+      "images": [
+        "https://images.unsplash.com/photo-1627454820516-1daaf71df435?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1611859266238-4b98091d9d9b?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=1200&q=80"
+      ],
+      "description": "Budget-friendly automatic ideal for learner or retired drivers. Clean throughout, no faults, drives perfectly. Air con, CD player, good tyres. Recent full service, fresh MOT. Great value automatic city car.",
+      "status": "In Stock",
+      "body": "Hatchback",
+      "colour": "Azure Blue",
+      "features": [
+        "Automatic transmission",
+        "1.2L petrol 80bhp",
+        "Air conditioning",
+        "CD/MP3 player",
+        "Electric mirrors",
+        "Low running costs"
+      ],
+      "complianceNotes": "ULEZ compliant Euro 5. Automatic gearbox serviced. £30/year tax.",
+      "complianceProofs": [
+        {
+          "id": "proof-stk2406-1",
+          "type": "MOT Certificate",
+          "reference": "MOT/NS12-2025",
+          "addedAt": "2025-10-10T13:20:00Z"
+        }
+      ],
+      "complianceHistory": [
+        {
+          "id": "snapshot-stk2406-20251010",
+          "vrm": "NS12ACT",
+          "recordedAt": "2025-10-10T13:20:00Z",
+          "summary": "Fresh MOT, automatic transmission",
+          "tax": {
+            "regime": "modern",
+            "firstYearRate": 110,
+            "totalAnnual": 30,
+            "expensiveCarSupplement": null
+          },
+          "ulez": "Compliant",
+          "caz": "Compliant",
+          "notes": "MOT pass with no advisories, auto gearbox serviced"
         }
       ]
     }
