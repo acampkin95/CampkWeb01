@@ -9,7 +9,7 @@ export async function GET() {
 }
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
-const ALLOWED_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif'];
+const ALLOWED_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif', 'image/heic', 'image/heif'];
 
 export async function POST(request: Request) {
   try {
@@ -24,9 +24,9 @@ export async function POST(request: Request) {
       return NextResponse.json({ message: "File too large (max 10MB)" }, { status: 400 });
     }
 
-    // Validate file type
+    // Validate file type - HEIC/HEIF will be automatically converted to WebP
     if (!ALLOWED_TYPES.includes(file.type)) {
-      return NextResponse.json({ message: "Invalid file type. Only images (JPEG, PNG, WebP, GIF) are allowed" }, { status: 400 });
+      return NextResponse.json({ message: "Invalid file type. Only images (JPEG, PNG, WebP, GIF, HEIC/HEIF) are allowed" }, { status: 400 });
     }
 
     const filename = (formData.get("name") as string) || (file as File).name || "upload";
