@@ -1,24 +1,48 @@
 @import "tailwindcss";
 
+/**
+ * Chelsea FC Blue Automotive Branding Color Palette
+ * Following 60-30-10 rule: 60% white/light, 30% Chelsea blue, 10% orange CTAs
+ */
 :root {
-  --background-color: #eef2ff;
-  --brand-color: #0f172a;
-  --accent-color: #f97316;
-  --muted-color: #94a3b8;
-  --glow-1: rgba(15, 23, 42, 0.45);
-  --glow-2: rgba(14, 165, 233, 0.35);
-  --glass-bg: rgba(255, 255, 255, 0.7);
-  --radius-xl: 2rem;
+  /* Primary Brand Colors */
+  --chelsea-blue: #034694;      /* Primary brand color - trust, professionalism */
+  --brand-color: #034694;        /* Alias for theme compatibility */
+
+  /* Supporting Colors */
+  --white: #ffffff;              /* Clean backgrounds, premium feel */
+  --background-color: #ffffff;   /* Alias for theme compatibility */
+  --charcoal: #3d4246;           /* Professional typography, secondary backgrounds */
+  --silver: #d1d3d4;             /* Borders, subtle accents */
+
+  /* Accent Colors */
+  --orange-cta: #ff8c42;         /* Call-to-action buttons, urgency elements */
+  --accent-color: #ff8c42;       /* Alias for theme compatibility */
+  --gold: #dba111;               /* Premium badges, optional accent */
+
+  /* Neutral & Muted */
+  --muted-color: #d1d3d4;        /* Light gray for subtle elements */
+  --light-bg: #f8fafc;           /* Subtle background variation */
+
+  /* Visual Effects */
+  --glow-chelsea: rgba(3, 70, 148, 0.15);     /* Chelsea blue glow */
+  --glow-orange: rgba(255, 140, 66, 0.12);    /* Orange accent glow */
+  --glass-bg: rgba(255, 255, 255, 0.85);      /* Premium glass effect */
+
+  /* Design System */
+  --radius-xl: 1.75rem;
+  --shadow-soft: 0 4px 20px rgba(3, 70, 148, 0.08);
+
   color-scheme: light;
 }
 
 @theme inline {
   --color-background: var(--background-color);
   --color-foreground: var(--brand-color);
-  --font-sans: var(--font-space-grotesk), "Space Grotesk", "Inter", system-ui, -apple-system,
-    BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --font-mono: var(--font-jetbrains-mono), "JetBrains Mono", ui-monospace, SFMono-Regular,
-    Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-sans: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --font-heading: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
 }
 
 html {
@@ -26,14 +50,16 @@ html {
 }
 
 body {
+  /* Clean professional background with subtle Chelsea blue accents */
   background:
-    radial-gradient(circle at 10% 20%, rgba(14, 165, 233, 0.25), transparent 50%),
-    radial-gradient(circle at 80% 0%, rgba(251, 146, 60, 0.2), transparent 50%),
-    linear-gradient(120deg, #f8fafc, #e2e8f0);
+    radial-gradient(circle at 15% 20%, var(--glow-chelsea), transparent 50%),
+    radial-gradient(circle at 85% 10%, var(--glow-orange), transparent 50%),
+    linear-gradient(135deg, var(--white), var(--light-bg));
   min-height: 100vh;
-  color: var(--brand-color);
+  color: var(--charcoal);
   font-family: var(--font-sans);
   letter-spacing: -0.01em;
+  line-height: 1.6;
 }
 
 @media (max-width: 768px) {
@@ -44,8 +70,8 @@ body {
 }
 
 ::selection {
-  background-color: rgba(15, 23, 42, 0.8);
-  color: white;
+  background-color: var(--chelsea-blue);
+  color: var(--white);
 }
 
 img,
@@ -60,15 +86,17 @@ video {
   left: -9999px;
   top: 1rem;
   padding: 0.75rem 1.25rem;
-  background: #0f172a;
-  color: #fff;
+  background: var(--chelsea-blue);
+  color: var(--white);
   border-radius: 999px;
   z-index: 100;
+  font-weight: 600;
 }
 
 .skip-link:focus-visible {
   left: 1rem;
-  outline: 3px solid #f97316;
+  outline: 3px solid var(--orange-cta);
+  box-shadow: var(--shadow-soft);
 }
 
 body::after {
@@ -76,7 +104,7 @@ body::after {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  background: radial-gradient(circle at 30% 40%, rgba(23, 37, 84, 0.1), transparent 55%);
+  background: radial-gradient(circle at 30% 40%, var(--glow-chelsea), transparent 60%);
   z-index: -1;
 }
 
@@ -86,8 +114,41 @@ a {
 }
 
 .glass-panel {
-  backdrop-filter: blur(18px);
+  backdrop-filter: blur(20px);
   background: var(--glass-bg);
-  border-radius: 1.75rem;
-  border: 1px solid rgba(148, 163, 184, 0.25);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--silver);
+  box-shadow: var(--shadow-soft);
+}
+
+/* CTA Button Styles - High-contrast orange for maximum conversion */
+.cta-primary {
+  background: var(--orange-cta);
+  color: var(--white);
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.cta-primary:hover {
+  background: #ff7a2e;
+  box-shadow: 0 6px 24px rgba(255, 140, 66, 0.3);
+  transform: translateY(-1px);
+}
+
+.cta-primary:active {
+  transform: translateY(0);
+}
+
+/* Typography Utilities */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--chelsea-blue);
+  letter-spacing: -0.02em;
+}
+
+/* Professional automotive link styling */
+a:hover {
+  color: var(--chelsea-blue);
+  transition: color 0.2s ease;
 }

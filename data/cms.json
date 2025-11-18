@@ -403,12 +403,12 @@
     }
   ],
   "theme": {
-    "brandColor": "#0f172a",
-    "accentColor": "#f97316",
-    "mutedColor": "#94a3b8",
-    "backgroundColor": "#f8fafc",
+    "brandColor": "#034694",
+    "accentColor": "#ff8c42",
+    "mutedColor": "#d1d3d4",
+    "backgroundColor": "#ffffff",
     "heroImage": "https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=1800&q=80",
-    "heroOverlay": "rgba(15,23,42,0.55)",
+    "heroOverlay": "rgba(3,70,148,0.60)",
     "logoText": "Campkin"
   },
   "performance": {

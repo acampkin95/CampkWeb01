@@ -1,6 +1,5 @@
 import type { CSSProperties } from "react";
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import Script from "next/script";
 import "./globals.css";
 import { SiteHeader } from "@/components/layout/site-header";
@@ -11,29 +10,6 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://campkinmotors.co.u
 const DEFAULT_OG_IMAGE =
   process.env.NEXT_PUBLIC_OG_IMAGE ??
   "https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=1800&q=80";
-const spaceGrotesk = localFont({
-  src: [
-    {
-      path: "../../public/fonts/SpaceGrotesk-Variable.woff2",
-      style: "normal",
-      weight: "300 700",
-    },
-  ],
-  display: "swap",
-  variable: "--font-space-grotesk",
-});
-
-const jetBrainsMono = localFont({
-  src: [
-    {
-      path: "../../public/fonts/JetBrainsMono-Variable.woff2",
-      style: "normal",
-      weight: "100 800",
-    },
-  ],
-  display: "swap",
-  variable: "--font-jetbrains-mono",
-});
 const BASE_DESCRIPTION =
   "Phil Campkin's independent Hertfordshire campus for flexible warehouse lets, car sales, EV-friendly repairs, and compliance tools.";
 
@@ -156,8 +132,17 @@ export default async function RootLayout({
   };
 
   return (
-    <html lang="en" className={`${spaceGrotesk.variable} ${jetBrainsMono.variable}`}>
-      <body className="bg-slate-50 antialiased" style={cssVars as CSSProperties}>
+    <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
+        <link
+          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Open+Sans:wght@400;600&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body className="antialiased" style={cssVars as CSSProperties}>
         <a href="#main-content" className="skip-link">
           Skip to content
         </a>
