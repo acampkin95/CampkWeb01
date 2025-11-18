@@ -44,12 +44,15 @@ export async function saveMedia(originalName: string, fileBuffer: Buffer): Promi
   const filename = `${baseName || "asset"}-${Date.now()}.webp`;
   const filePath = path.join(uploadDir, filename);
 
+  // Import constants dynamically to avoid circular dependencies
+  const { FILE_UPLOAD } = await import("@/lib/constants");
+
   const image = sharp(fileBuffer, { failOn: "none" });
   const metadata = await image.metadata();
 
   await image
-    .resize({ width: 2000, withoutEnlargement: true })
-    .webp({ quality: 82 })
+    .resize({ width: FILE_UPLOAD.MAX_IMAGE_WIDTH, withoutEnlargement: true })
+    .webp({ quality: FILE_UPLOAD.WEBP_QUALITY })
     .toFile(filePath);
 
   // eslint-disable-next-line security/detect-non-literal-fs-filename

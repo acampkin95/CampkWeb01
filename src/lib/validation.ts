@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { VEHICLE_CONSTRAINTS, DAMAGE_SCORING } from "@/lib/constants";
 
 export const sectionSchema = z.object({
   id: z.string(),
@@ -51,7 +52,7 @@ export const vehicleSchema = z.object({
   mileage: z.number().nonnegative(),
   fuel: z.string(),
   transmission: z.string(),
-  year: z.number().int().min(1980),
+  year: z.number().int().min(VEHICLE_CONSTRAINTS.MIN_YEAR),
   vrm: z.string().optional(),
   images: z.array(z.string()).default([]),
   description: z.string(),
@@ -90,10 +91,10 @@ export const buyingRequestSchema = z.object({
   vrm: z.string().optional(),
   make: z.string().optional(),
   model: z.string().optional(),
-  year: z.number().int().min(1980).max(new Date().getFullYear() + 1).optional(),
-  mileage: z.number().int().min(0).optional(),
+  year: z.number().int().min(VEHICLE_CONSTRAINTS.MIN_YEAR).max(VEHICLE_CONSTRAINTS.MAX_YEAR).optional(),
+  mileage: z.number().int().min(VEHICLE_CONSTRAINTS.MIN_MILEAGE).optional(),
   askingPrice: z.number().min(0).optional(),
-  damage: z.record(z.enum(["bodywork", "interior", "mechanical"]), z.number().min(1).max(5)).optional(),
+  damage: z.record(z.enum(["bodywork", "interior", "mechanical"]), z.number().min(DAMAGE_SCORING.MIN_SCORE).max(DAMAGE_SCORING.MAX_SCORE)).optional(),
   notes: z.string().optional(),
 });
 
