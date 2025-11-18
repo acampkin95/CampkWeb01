@@ -1,6 +1,10 @@
 import { NextResponse } from "next/server";
 import { createSessionToken, sessionCookieName, sessionMaxAge, verifyPasscode } from "@/lib/auth";
 import { rateLimit } from "@/lib/rateLimit";
+import { RATE_LIMITS, HTTP_STATUS } from "@/lib/constants";
+
+const RATE_LIMIT_MAX = Number(process.env.ADMIN_RATE_LIMIT ?? RATE_LIMITS.AUTH.MAX_ATTEMPTS);
+const RATE_LIMIT_WINDOW_MS = Number(process.env.ADMIN_RATE_WINDOW_MS ?? RATE_LIMITS.AUTH.WINDOW_MS);
 import { ADMIN_RATE_LIMIT_WINDOW_MS } from "@/lib/constants";
 
 const RATE_LIMIT_MAX = Number(process.env.ADMIN_RATE_LIMIT ?? "10");
@@ -21,16 +25,16 @@ export async function POST(request: Request) {
   if (limited) {
     return NextResponse.json(
       { message: "Too many attempts. Please wait before retrying." },
-      { status: 429, headers: retryAfter ? { "Retry-After": `${Math.ceil(retryAfter / 1000)}` } : undefined },
+      { status: HTTP_STATUS.TOO_MANY_REQUESTS, headers: retryAfter ? { "Retry-After": `${Math.ceil(retryAfter / 1000)}` } : undefined },
     );
   }
 
   try {
     const { passcode } = await request.json();
 
-    if (!passcode || !verifyPasscode(passcode)) {
-      return NextResponse.json({ message: "Incorrect passcode" }, { status: 401 });
-    }
+  if (!passcode || !verifyPasscode(passcode)) {
+    return NextResponse.json({ message: "Incorrect passcode" }, { status: HTTP_STATUS.UNAUTHORIZED });
+  }
 
     const token = createSessionToken();
     const response = NextResponse.json({ success: true });

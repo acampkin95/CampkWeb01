@@ -39,18 +39,18 @@ export default async function Home() {
       <section className="grid gap-4 rounded-3xl border border-slate-200 bg-white p-6 md:grid-cols-2">
         <article className="rounded-2xl border border-slate-100 p-5">
           <p className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">Sublet listings</p>
-          <h3 className="text-2xl font-semibold text-slate-900">See what’s open</h3>
+          <h3 className="text-2xl font-semibold text-[var(--chelsea-blue)]">See what&apos;s open</h3>
           <p className="text-sm text-slate-600">Medium + large bays, each with two parking spots and shared amenities.</p>
-          <Link href="/sublets" className="mt-4 inline-flex items-center text-sm font-semibold text-slate-900">
-            Browse bays →
+          <Link href="/sublets" className="mt-4 inline-flex items-center rounded-full bg-[var(--chelsea-blue)] px-6 py-2.5 text-sm font-semibold text-white hover:bg-[var(--orange-cta)] transition-colors">
+            Browse bays
           </Link>
         </article>
         <article className="rounded-2xl border border-slate-100 p-5">
           <p className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">Available cars</p>
-          <h3 className="text-2xl font-semibold text-slate-900">Sales + sourcing</h3>
+          <h3 className="text-2xl font-semibold text-[var(--chelsea-blue)]">Sales + sourcing</h3>
           <p className="text-sm text-slate-600">Small, curated stock with buying certification and friendly delivery.</p>
-          <Link href="/cars" className="mt-4 inline-flex items-center text-sm font-semibold text-slate-900">
-            View cars →
+          <Link href="/cars" className="mt-4 inline-flex items-center rounded-full bg-[var(--chelsea-blue)] px-6 py-2.5 text-sm font-semibold text-white hover:bg-[var(--orange-cta)] transition-colors">
+            View cars
           </Link>
         </article>
       </section>
@@ -59,10 +59,10 @@ export default async function Home() {
         <header className="flex items-center justify-between">
           <div>
             <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Currently available</p>
-            <h2 className="text-2xl font-semibold text-slate-900">Warehouse snapshot</h2>
+            <h2 className="text-2xl font-semibold text-[var(--chelsea-blue)]">Warehouse snapshot</h2>
           </div>
-          <Link href="/sublets" className="text-sm font-semibold text-slate-900">
-            Full sublet list
+          <Link href="/sublets" className="rounded-full border-2 border-[var(--chelsea-blue)] px-5 py-2 text-sm font-semibold text-[var(--chelsea-blue)] hover:bg-[var(--chelsea-blue)] hover:text-white transition-all">
+            View all bays
           </Link>
         </header>
         <div className="grid gap-4 md:grid-cols-3">
@@ -85,35 +85,50 @@ export default async function Home() {
         <header className="flex items-center justify-between">
           <div>
             <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Cars</p>
-            <h2 className="text-2xl font-semibold text-slate-900">Ready to show</h2>
+            <h2 className="text-2xl font-semibold text-[var(--chelsea-blue)]">Ready to show</h2>
           </div>
-          <Link href="/cars" className="text-sm font-semibold text-slate-900">
-            All cars
+          <Link href="/cars" className="rounded-full border-2 border-[var(--chelsea-blue)] px-5 py-2 text-sm font-semibold text-[var(--chelsea-blue)] hover:bg-[var(--chelsea-blue)] hover:text-white transition-all">
+            View all cars
           </Link>
         </header>
         <div className="grid gap-4 md:grid-cols-3">
           {cars.map((vehicle) => (
-            <article key={vehicle.id} className="rounded-2xl border border-slate-100 p-4 text-sm text-slate-600">
-              <p className="text-xs uppercase tracking-[0.3em] text-slate-400">{vehicle.status}</p>
-              <h3 className="text-lg font-semibold text-slate-900">{vehicle.title}</h3>
-              <p>{vehicle.year} · {vehicle.fuel}</p>
-              <p className="text-xl font-semibold text-slate-900">£{vehicle.price.toLocaleString()}</p>
-            </article>
+            <Link key={vehicle.id} href={`/cars/${vehicle.id}`}>
+              <article className="rounded-2xl border border-slate-100 p-4 text-sm text-slate-600 hover:border-[var(--chelsea-blue)] hover:shadow-md transition-all h-full">
+                <p className="text-xs uppercase tracking-[0.3em] text-slate-400">{vehicle.status}</p>
+                <h3 className="text-lg font-semibold text-[var(--chelsea-blue)]">{vehicle.title}</h3>
+                <p>{vehicle.year} · {vehicle.fuel}</p>
+                <p className="text-xl font-semibold text-[var(--chelsea-blue)] mt-2">£{vehicle.price.toLocaleString()}</p>
+              </article>
+            </Link>
           ))}
         </div>
       </section>
 
-      <section className="rounded-3xl border border-slate-200 bg-white p-6 text-center">
-        <p className="text-xs font-semibold uppercase tracking-[0.4em] text-slate-400">Let’s talk</p>
-        <h2 className="text-3xl font-semibold text-slate-900">Need a bay or a certified car?</h2>
+      <section className="glass-panel p-8 text-center space-y-6">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.4em] text-slate-400">Vehicle Lookup Tool</p>
+          <h2 className="text-2xl font-semibold text-[var(--chelsea-blue)] mt-2">Check any UK car instantly</h2>
+          <p className="mx-auto mt-3 max-w-2xl text-sm text-slate-600">
+            Free VRM lookup for MOT history, tax status, and DVLA compliance. Perfect for buyers or sellers.
+          </p>
+        </div>
+        <Link href="/admin#buying-tools" className="cta-primary inline-flex rounded-full px-8 py-3 text-sm font-semibold">
+          Try Vehicle Lookup
+        </Link>
+      </section>
+
+      <section className="glass-panel p-8 text-center space-y-4">
+        <p className="text-xs font-semibold uppercase tracking-[0.4em] text-slate-400">Let&apos;s talk</p>
+        <h2 className="text-3xl font-semibold text-[var(--chelsea-blue)]">Need a bay or a certified car?</h2>
         <p className="mx-auto mt-3 max-w-2xl text-sm text-slate-600">
-          Phil answers every enquiry himself. Share what you need and he’ll respond within one working day.
+          Phil answers every enquiry himself. Share what you need and he&apos;ll respond within one working day.
         </p>
-        <div className="mt-4 flex flex-wrap justify-center gap-3 text-sm font-semibold">
-          <Link href="/contact" className="rounded-full bg-slate-900 px-6 py-3 text-white">
+        <div className="mt-6 flex flex-wrap justify-center gap-3 text-sm font-semibold">
+          <Link href="/contact" className="cta-primary rounded-full px-8 py-3">
             Contact Phil
           </Link>
-          <Link href="/sublets" className="rounded-full border border-slate-300 px-6 py-3 text-slate-900">
+          <Link href="/sublets" className="rounded-full border-2 border-[var(--chelsea-blue)] px-8 py-3 text-[var(--chelsea-blue)] hover:bg-[var(--chelsea-blue)] hover:text-white transition-all">
             View sublets
           </Link>
         </div>

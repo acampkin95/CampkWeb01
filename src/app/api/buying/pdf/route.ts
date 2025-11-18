@@ -3,6 +3,8 @@ import { z } from "zod";
 import { buyingRequestSchema } from "@/lib/validation";
 import { evaluateBuyingRequest } from "@/lib/services/buying";
 import { generateBuyingReport } from "@/lib/pdf/buying-report";
+import { HTTP_STATUS } from "@/lib/constants";
+import { logger } from "@/lib/logger";
 
 export async function POST(request: Request) {
   try {
@@ -13,7 +15,7 @@ export async function POST(request: Request) {
     const filename = `buying-${validated.vrm ?? validated.make ?? "report"}.pdf`;
 
     return new NextResponse(buffer as unknown as BodyInit, {
-      status: 200,
+      status: HTTP_STATUS.OK,
       headers: {
         "Content-Type": "application/pdf",
         "Content-Disposition": `attachment; filename="${filename}"`,
@@ -22,8 +24,9 @@ export async function POST(request: Request) {
     });
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return NextResponse.json({ message: "Invalid input" }, { status: 400 });
+      return NextResponse.json({ message: "Invalid input" }, { status: HTTP_STATUS.BAD_REQUEST });
     }
-    return NextResponse.json({ message: (error as Error).message }, { status: 400 });
+    logger.error("PDF generation failed", { error: error instanceof Error ? error.message : String(error) });
+    return NextResponse.json({ message: (error as Error).message }, { status: HTTP_STATUS.BAD_REQUEST });
   }
 }
